@@ -16,14 +16,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-      /* --- 全局变量与基础设置 --- */
+      /* --- 核心变量 --- */
       :root {
-        --primary-color: #3D74B6;       /* 主色调：稳重的学术蓝 */
-        --accent-color: #CC66DA;        /* 强调色：紫罗兰渐变用 */
-        --text-main: #2c3e50;           /* 正文深灰 */
-        --text-light: #64748b;          /* 辅助文字浅灰 */
-        --bg-color: #fafafa;            /* 整体背景极淡的灰 */
-        --card-bg: #ffffff;             /* 卡片纯白背景 */
+        --primary-color: #3D74B6;
+        --accent-color: #CC66DA;
+        --text-main: #2c3e50;
+        --text-light: #64748b;
+        --bg-color: #fafafa;
+        --card-bg: #ffffff;
         --hover-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
       }
 
@@ -31,36 +31,19 @@
         background-color: var(--bg-color);
         color: var(--text-main);
         font-family: 'Inter', sans-serif;
-        font-weight: 400;
         font-size: 16px;
         line-height: 1.6;
         margin: 0;
         padding: 40px 20px;
       }
 
-      /* 链接基础样式 */
-      a {
-        color: var(--primary-color);
-        text-decoration: none;
-        transition: all 0.2s ease;
-      }
-      a:hover {
-        color: var(--accent-color);
-      }
+      a { color: var(--primary-color); text-decoration: none; transition: all 0.2s ease; }
+      a:hover { color: var(--accent-color); }
 
-      /* 布局容器 */
-      .container {
-        width: 100%;
-        max-width: 900px;
-        margin: 0 auto;
-      }
+      .container { width: 100%; max-width: 900px; margin: 0 auto; }
 
-      /* --- 头部 Hero Section 优化 --- */
-      .header-table {
-        margin-bottom: 40px;
-        width: 100%;
-      }
-      
+      /* --- Hero Section --- */
+      .header-table { margin-bottom: 40px; width: 100%; }
       .name-title {
         font-family: 'Playfair Display', serif;
         font-size: 2.8em;
@@ -69,299 +52,175 @@
         background: linear-gradient(135deg, var(--text-main) 30%, var(--primary-color) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        letter-spacing: -0.02em;
       }
-
-      .intro-text {
-        font-size: 1.05em;
-        color: var(--text-main);
-        text-align: justify;
-      }
-
-      /* 头像美化 */
-      .profile-img-container {
-        position: relative;
-        padding: 10px;
-      }
+      .intro-text { font-size: 1.05em; color: var(--text-main); text-align: justify; }
       
       .profile-img {
-        width: 240px;
-        height: 240px;
-        object-fit: cover;
-        border-radius: 50%; /* 圆形头像 */
-        box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* 柔和阴影 */
-        border: 4px solid #fff;
+        width: 240px; height: 240px; object-fit: cover;
+        border-radius: 50%; border: 4px solid #fff;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         transition: transform 0.3s ease;
       }
-      
-      .profile-img:hover {
-        transform: scale(1.03) rotate(2deg);
-      }
+      .profile-img:hover { transform: scale(1.03) rotate(2deg); }
 
-      /* 社交链接按钮化 */
-      .social-links {
-        margin-top: 20px;
-        display: flex;
-        gap: 15px;
-        justify-content: center; /* 居中对齐 */
-      }
-
+      .social-links { margin-top: 20px; display: flex; gap: 15px; }
       .social-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 16px;
-        background: #fff;
-        border: 1px solid #e2e8f0;
-        border-radius: 50px;
-        font-size: 0.9em;
-        color: var(--text-main);
-        font-weight: 500;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px;
+        background: #fff; border: 1px solid #e2e8f0; border-radius: 50px;
+        font-size: 0.9em; color: var(--text-main); font-weight: 500;
         transition: all 0.2s;
       }
-
       .social-btn:hover {
-        background: var(--primary-color);
-        color: #fff;
-        border-color: var(--primary-color);
+        background: var(--primary-color); color: #fff; border-color: var(--primary-color);
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(61, 116, 182, 0.3);
       }
-      
-      .social-btn i { font-size: 1.1em; }
 
-
-      /* --- 章节标题 --- */
+      /* --- Section Styles --- */
       .section-title {
         font-family: 'Playfair Display', serif;
         font-size: 1.8em;
         font-weight: 700;
         margin-top: 50px;
         margin-bottom: 25px;
-        color: var(--text-main);
         border-bottom: 2px solid #eaeaea;
         padding-bottom: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
+        display: flex; justify-content: space-between; align-items: flex-end;
       }
 
-      /* --- News 列表 --- */
-      .news-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      .news-list li {
-        margin-bottom: 12px;
-        padding-left: 20px;
-        position: relative;
-        color: var(--text-main);
-        font-size: 0.95em;
-      }
-      .news-list li::before {
-        content: "•";
-        color: var(--accent-color);
-        font-weight: bold;
-        position: absolute;
-        left: 0;
-        top: 0px;
-        font-size: 1.2em;
-      }
-      .news-date {
-        font-weight: 600;
-        color: var(--primary-color);
-        margin-right: 5px;
-      }
+      /* --- News List --- */
+      .news-list { list-style: none; padding: 0; }
+      .news-list li { margin-bottom: 12px; padding-left: 20px; position: relative; }
+      .news-list li::before { content: "•"; color: var(--accent-color); font-weight: bold; position: absolute; left: 0; }
+      .news-date { font-weight: 600; color: var(--primary-color); margin-right: 5px; }
 
-      /* --- 论文列表 (Fancy Cards) --- */
-      .paper-table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0 20px; /* 卡片之间的垂直间距 */
-      }
-
-      .paper-row {
-        background: var(--card-bg);
-        transition: all 0.3s ease;
-      }
-      
-      /* 让 TR 看起来像卡片的核心黑科技 */
+      /* --- Research Cards --- */
+      .paper-table { width: 100%; border-collapse: separate; border-spacing: 0 20px; }
       .paper-row td {
-        border-top: 1px solid #f0f0f0;
-        border-bottom: 1px solid #f0f0f0;
-        padding: 25px;
-        background: #fff;
+        border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0; padding: 25px; background: #fff;
       }
-      .paper-row td:first-child {
-        border-left: 1px solid #f0f0f0;
-        border-top-left-radius: 12px;
-        border-bottom-left-radius: 12px;
-        width: 30%; /* 调整图片列宽 */
-      }
-      .paper-row td:last-child {
-        border-right: 1px solid #f0f0f0;
-        border-top-right-radius: 12px;
-        border-bottom-right-radius: 12px;
-      }
-
-      /* 悬停效果 */
+      .paper-row td:first-child { border-left: 1px solid #f0f0f0; border-radius: 12px 0 0 12px; width: 30%; }
+      .paper-row td:last-child { border-right: 1px solid #f0f0f0; border-radius: 0 12px 12px 0; }
+      
       .paper-row:hover td {
-        border-color: transparent; /* 悬浮时隐藏边框 */
-        background: #fff;
-        transform: translateY(-4px); /* 整体上浮 */
-        /* 由于 tr 不能直接 transform, 我们让 td 配合阴影看起来像整体移动 */
-        box-shadow: var(--hover-shadow);
-        z-index: 10;
-        position: relative;
+        background: #fff; transform: translateY(-4px); box-shadow: var(--hover-shadow); border-color: transparent;
       }
+      .paper-img { width: 100%; border-radius: 6px; border: 1px solid #eee; transition: all 0.3s; }
       
-      .paper-img {
-        width: 100%;
-        border-radius: 6px;
-        border: 1px solid #eee;
-        transition: all 0.3s;
-      }
-      .paper-row:hover .paper-img {
-        transform: scale(1.02);
-      }
-
-      .paper-title {
-        font-weight: 600;
-        font-size: 1.15em;
-        color: var(--text-main);
-        display: block;
-        margin-bottom: 8px;
-        line-height: 1.3;
-      }
+      .paper-title { font-weight: 600; font-size: 1.15em; display: block; margin-bottom: 8px; }
+      .paper-authors { color: var(--text-light); font-size: 0.95em; margin-bottom: 6px; }
+      .paper-venue { font-style: italic; font-weight: 500; margin-bottom: 12px; }
       
-      .paper-authors {
-        color: var(--text-light);
-        font-size: 0.95em;
-        margin-bottom: 6px;
-      }
-      
-      .paper-venue {
-        font-style: italic;
-        color: var(--text-main);
-        font-weight: 500;
-        margin-bottom: 12px;
-      }
-
-      /* 论文链接按钮 (Badge Style) */
-      .paper-btn-group {
-        margin-top: 8px;
-      }
       .paper-btn {
-        display: inline-block;
-        padding: 4px 10px;
-        margin-right: 6px;
-        margin-bottom: 5px;
-        font-size: 0.75em;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: var(--primary-color);
-        background-color: rgba(61, 116, 182, 0.08); /* 极淡的蓝色背景 */
-        border-radius: 4px;
-        border: 1px solid rgba(61, 116, 182, 0.2);
-        transition: all 0.2s;
+        display: inline-block; padding: 4px 10px; margin-right: 6px; font-size: 0.75em;
+        font-weight: 600; text-transform: uppercase; color: var(--primary-color);
+        background: rgba(61, 116, 182, 0.08); border-radius: 4px; border: 1px solid rgba(61, 116, 182, 0.2);
       }
-      .paper-btn:hover {
-        background-color: var(--primary-color);
-        color: #fff;
-        border-color: var(--primary-color);
-        box-shadow: 0 4px 6px rgba(61, 116, 182, 0.2);
-      }
+      .paper-btn:hover { background: var(--primary-color); color: #fff; }
 
-      /* --- Tabs 按钮优化 --- */
-      .tab-container {
-        font-size: 0.5em; /* 基于 h1 的比例 */
-        vertical-align: middle;
-        display: inline-block;
-        margin-left: 20px;
-      }
-      
       .tab-button {
-        background: transparent;
-        border: 1px solid #e2e8f0;
-        padding: 6px 16px;
-        margin: 0 2px;
-        border-radius: 20px;
+        background: transparent; border: 1px solid #e2e8f0; padding: 6px 16px; margin-left: 5px;
+        border-radius: 20px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 14px;
+      }
+      .tab-button.active { background: var(--primary-color); color: white; border-color: transparent; }
+      .research-content { display: none; animation: fadeIn 0.6s ease; }
+      .research-content.active { display: block; }
+      
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+      /* --- Gallery (Photography) Styles --- */
+      .gallery-grid {
+        column-count: 3; /* 3列瀑布流 */
+        column-gap: 20px;
+      }
+      
+      .gallery-item {
+        break-inside: avoid;
+        margin-bottom: 20px;
+        position: relative;
         cursor: pointer;
-        font-family: 'Inter', sans-serif;
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--text-light);
-        transition: all 0.3s ease;
-      }
-      
-      .tab-button:hover {
-        background: #f1f5f9;
-        color: var(--primary-color);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       }
 
-      .tab-button.active {
-        background: linear-gradient(135deg, var(--primary-color), #5b8dc9);
-        color: white;
-        border-color: transparent;
-        box-shadow: 0 4px 10px rgba(61, 116, 182, 0.3);
-      }
-      
-      .research-content {
-        display: none;
-        animation: fadeIn 0.6s ease;
-      }
-      .research-content.active {
+      .gallery-item img {
+        width: 100%;
         display: block;
+        transition: transform 0.5s ease;
+      }
+
+      /* 悬停时的遮罩和文字 */
+      .gallery-overlay {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        padding: 20px 15px 10px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
       }
       
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
+      .gallery-caption {
+        color: white;
+        font-size: 0.9em;
+        font-weight: 500;
+        font-family: 'Inter', sans-serif;
       }
 
-      /* Footer */
-      .footer {
-        margin-top: 60px;
-        text-align: center;
-        padding-top: 20px;
-        border-top: 1px solid #eee;
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+      .gallery-item:hover .gallery-overlay {
+        opacity: 1;
       }
 
-      /* 移动端适配 */
+      /* Lightbox (点击放大) */
+      .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        animation: fadeIn 0.3s;
+      }
+      .lightbox img {
+        max-width: 90%;
+        max-height: 80vh;
+        border-radius: 4px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      }
+      .lightbox-caption {
+        color: #fff;
+        margin-top: 15px;
+        font-size: 1.1em;
+        font-family: 'Playfair Display', serif;
+      }
+      .lightbox-close {
+        position: absolute;
+        top: 30px;
+        right: 40px;
+        color: #fff;
+        font-size: 40px;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      .lightbox-close:hover { color: var(--accent-color); }
+
+      /* Mobile Support */
       @media (max-width: 768px) {
         body { padding: 20px 10px; }
-        .header-table td { 
-          display: block; 
-          width: 100% !important; 
-          text-align: center;
-        }
+        .header-table td { display: block; width: 100% !important; text-align: center; }
         .profile-img { width: 180px; height: 180px; margin-bottom: 20px; }
-        .intro-text { text-align: left; }
         .social-links { justify-content: center; flex-wrap: wrap; }
-        
-        .paper-row td {
-            display: block;
-            width: 100% !important;
-            border: none;
-        }
-        .paper-row td:first-child {
-            border-top: 1px solid #f0f0f0;
-            border-left: 1px solid #f0f0f0;
-            border-right: 1px solid #f0f0f0;
-            border-bottom: none;
-            border-radius: 12px 12px 0 0;
-            padding-bottom: 0;
-        }
-        .paper-row td:last-child {
-            border-bottom: 1px solid #f0f0f0;
-            border-left: 1px solid #f0f0f0;
-            border-right: 1px solid #f0f0f0;
-            border-radius: 0 0 12px 12px;
-        }
-        .paper-img { width: 100%; max-width: 300px; margin: 0 auto; display: block; }
+        .paper-row td { display: block; width: 100% !important; border: none; }
+        .paper-row td:first-child { border-radius: 12px 12px 0 0; border: 1px solid #f0f0f0; border-bottom: none; }
+        .paper-row td:last-child { border-radius: 0 0 12px 12px; border: 1px solid #f0f0f0; border-top: none;}
+        .gallery-grid { column-count: 2; } /* 手机上变2列 */
+      }
+      @media (max-width: 480px) {
+        .gallery-grid { column-count: 1; } /* 小屏变1列 */
       }
     </style>
   </head>
@@ -374,34 +233,19 @@
           <tr>
             <td style="width:35%; vertical-align:middle; text-align:center;">
               <div class="profile-img-container">
-                <a href="images/scholar.png">
-                  <img src="images/scholar.png" alt="Yang Zhang Profile" class="profile-img">
-                </a>
+                <a href="images/scholar.png"><img src="images/scholar.png" alt="Yang Zhang Profile" class="profile-img"></a>
               </div>
             </td>
-            
             <td style="width:65%; vertical-align:middle; padding-left: 30px;">
               <div class="name-title">Yang Zhang</div>
-              
               <div class="intro-text">
-                <p>
-                  I'm a Postdoctoral Researcher at <a href="https://dscl.uconn.edu/">UConn DSC lab</a>, advised by Prof. <a href="https://dscl.uconn.edu/director/">Jiong Tang</a>. I received my Ph.D. in Mechanical Engineering from University of Connecticut in December 2024.
-                </p>
-                <p>
-                  My research interests lie in <strong>Computational Intelligence, AI-driven Engineering, Digital Twin, and Inverse Analysis</strong>. I develop intelligent optimization methods and integrate them with physics-based modeling to create robust engineering analysis tools.
-                </p>
+                <p>I'm a Postdoctoral Researcher at <a href="https://dscl.uconn.edu/">UConn DSC lab</a>, advised by Prof. <a href="https://dscl.uconn.edu/director/">Jiong Tang</a>. I received my Ph.D. in Mechanical Engineering from UConn in 2024.</p>
+                <p>My research interests lie in <strong>Computational Intelligence, AI-driven Engineering, Digital Twin, and Inverse Analysis</strong>.</p>
               </div>
-
               <div class="social-links">
-                <a href="mailto:yang.3.zhang@uconn.edu" class="social-btn">
-                  <i class="fas fa-envelope"></i> Email
-                </a>
-                <a href="https://scholar.google.com/citations?user=NPhTb-wAAAAJ&hl=en&authuser=1" class="social-btn">
-                  <i class="fas fa-graduation-cap"></i> Scholar
-                </a>
-                <a href="https://www.linkedin.com/in/yang-zhang-16822223a/" class="social-btn">
-                  <i class="fab fa-linkedin"></i> LinkedIn
-                </a>
+                <a href="mailto:yang.3.zhang@uconn.edu" class="social-btn"><i class="fas fa-envelope"></i> Email</a>
+                <a href="https://scholar.google.com/citations?user=NPhTb-wAAAAJ&hl=en&authuser=1" class="social-btn"><i class="fas fa-graduation-cap"></i> Scholar</a>
+                <a href="https://www.linkedin.com/in/yang-zhang-16822223a/" class="social-btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
               </div>
             </td>
           </tr>
@@ -412,15 +256,13 @@
       <ul class="news-list">
         <li><span class="news-date">Sep 2025:</span> Gave a talk at UConn CMSC webinar on "Toward Computational Intelligence in Digital Twin for Industrial 4.0".</li>
         <li><span class="news-date">Sep 2025:</span> Paper "Paper-Less Can Be More" was accepted by <strong>MSSP</strong>.</li>
-        <li><span class="news-date">Aug 2025:</span> Attended ASME IDETC-CIE 2025 conference and presented on wind turbine inspection.</li>
-        <li><span class="news-date">May 2025:</span> Paper accepted to <strong>ASME Letters in Dynamic Systems and Control</strong>.</li>
-        <li><span class="news-date">Jan 2025:</span> Paper accepted to <strong>AIAA Journal</strong>.</li>
+        <li><span class="news-date">Aug 2025:</span> Attended ASME IDETC-CIE 2025 conference.</li>
         <li><span class="news-date">Jan 2025:</span> Started postdoctoral position at UConn DSC lab.</li>
       </ul>
 
       <div class="section-title">
         Research
-        <div class="tab-container">
+        <div>
           <button class="tab-button active" onclick="showTab('selected')">Selected</button>
           <button class="tab-button" onclick="showTab('full')">All Publications</button>
         </div>
@@ -429,274 +271,36 @@
       <div id="selected-research" class="research-content active">
         <table class="paper-table">
           <tbody>
-            
             <tr class="paper-row">
               <td style="vertical-align:middle">
-                  <a href="images/paperReconstruction.png">
-                      <img src='images/paperReconstruction.png' class="paper-img" alt="paper thumbnail">
-                  </a>
+                  <a href="images/paperReconstruction.png"><img src='images/paperReconstruction.png' class="paper-img"></a>
               </td>
               <td style="vertical-align:middle">
-                  <span class="paper-title">Less Can Be More: Dictionary-driven reconstruction of full-field measurements from optimally configured sensor network</span>
-                  <div class="paper-authors">
-                    <strong>Yang Zhang</strong>, Joshua Dupont, Qianyu Zhou, Jiong Tang
-                  </div>
+                  <span class="paper-title">Less Can Be More: Dictionary-driven reconstruction of full-field measurements</span>
+                  <div class="paper-authors"><strong>Yang Zhang</strong>, Joshua Dupont, Qianyu Zhou, Jiong Tang</div>
                   <div class="paper-venue">Mechanical Systems and Signal Processing, 2025</div>
-                  
                   <div class="paper-btn-group">
                     <a href="https://doi.org/10.1016/j.ymssp.2025.113340" class="paper-btn">Paper</a>
-                    </div>
+                  </div>
               </td>
             </tr>
-
             <tr class="paper-row">
               <td style="vertical-align:middle">
-                  <a href="images/paper2.gif">
-                      <img src='images/paper2.gif' class="paper-img" alt="paper thumbnail">
-                  </a>
+                  <a href="images/paper2.gif"><img src='images/paper2.gif' class="paper-img"></a>
               </td>
               <td style="vertical-align:middle">
-                  <span class="paper-title">Harnessing collaborative learning automata to guide multi-objective optimization based inverse analysis</span>
-                  <div class="paper-authors">
-                    <strong>Yang Zhang</strong>, Kai Zhou, Jiong Tang
-                  </div>
+                  <span class="paper-title">Harnessing collaborative learning automata</span>
+                  <div class="paper-authors"><strong>Yang Zhang</strong>, Kai Zhou, Jiong Tang</div>
                   <div class="paper-venue">Applied Soft Computing, 2024</div>
-                  
-                  <div class="paper-btn-group">
-                    <a href="https://doi.org/10.1016/j.asoc.2024.111697" class="paper-btn">Paper</a>
-                  </div>
+                  <div class="paper-btn-group"><a href="#" class="paper-btn">Paper</a></div>
               </td>
             </tr>
-
-            <tr class="paper-row">
-              <td style="vertical-align:middle">
-                  <a href="images/paper3.gif">
-                      <img src='images/paper3.gif' class="paper-img" alt="paper thumbnail">
-                  </a>
-              </td>
-              <td style="vertical-align:middle">
-                  <span class="paper-title">Piezoelectric impedance-based high-accuracy damage identification using sparsity conscious multi-objective optimization</span>
-                  <div class="paper-authors">
-                    <strong>Yang Zhang</strong>, Kai Zhou, Jiong Tang
-                  </div>
-                  <div class="paper-venue">Mechanical Systems and Signal Processing, 2023</div>
-                  
-                  <div class="paper-btn-group">
-                    <a href="https://doi.org/10.1016/j.ymssp.2023.111093" class="paper-btn">Paper</a>
-                  </div>
-              </td>
-            </tr>
-
-            <tr class="paper-row">
-              <td style="vertical-align:middle">
-                  <a href="images/paper4.png">
-                      <img src='images/paper4.png' class="paper-img" alt="paper thumbnail">
-                  </a>
-              </td>
-              <td style="vertical-align:middle">
-                  <span class="paper-title">Piezoelectric Impedance-Based Structural Damage Identification Empowered With Tunable Circuitry Integration</span>
-                  <div class="paper-authors">
-                    <strong>Yang Zhang*</strong>, Joshua Dupont, Ting Wang, Jiong Tang
-                  </div>
-                  <div class="paper-venue">Journal of Vibration and Acoustics, 2024</div>
-                  
-                  <div class="paper-btn-group">
-                    <a href="https://doi.org/10.1115/1.4066311" class="paper-btn">Paper</a>
-                  </div>
-              </td>
-            </tr>
-
           </tbody>
         </table>
       </div>
-      
+
       <div id="full-list" class="research-content">
-         <table class="paper-table">
-          <tbody>
-
-            <tr class="paper-row">
-                <td style="vertical-align:middle">
-                    <a href="images/paper5.png">
-                        <img src='images/paper5.png' class="paper-img" alt="paper thumbnail">
-                    </a>
-                </td>
-                <td style="vertical-align:middle">
-                    <span class="paper-title">High-Frequency Active Interrogation for Structural Damage Identification Enabled by Intelligent Hierarchical Search</span>
-                    <div class="paper-authors">
-                      <strong>Yang Zhang*</strong>, Jiong Tang
-                    </div>
-                    <div class="paper-venue">AIAA Journal</div>
-                    <div class="paper-btn-group">
-                      <a href="https://doi.org/10.2514/1.J064863" class="paper-btn">Paper</a>
-                    </div>
-                </td>
-            </tr>
-  
-            <tr class="paper-row">
-                <td style="vertical-align:middle">
-                    <a href="images/paper1.png">
-                        <img src='images/paper1.png' class="paper-img" alt="paper thumbnail">
-                    </a>
-                </td>
-                <td style="vertical-align:middle">
-                    <span class="paper-title">Discriminative Feature Extraction Through Dictionary Learning for Piezoelectric Admittance-Based Bolt-Loosening Damage Detection</span>
-                    <div class="paper-authors">
-                      <strong>Yang Zhang</strong>, Qianyu Zhou, Jiong Tang
-                    </div>
-                    <div class="paper-venue">ASME Letters in Dynamic Systems and Control</div>
-                    <div class="paper-btn-group">
-                      <a href="https://doi.org/10.1115/1.4068353" class="paper-btn">Paper</a>
-                    </div>
-                </td>
-            </tr>
-
-            <tr class="paper-row">
-              <td style="vertical-align:middle">
-                  <a href="images/paper6.png">
-                      <img src='images/paper6.png' class="paper-img" alt="paper thumbnail">
-                  </a>
-              </td>
-              <td style="vertical-align:middle">
-                  <span class="paper-title">ScanBot: Towards Intelligent Surface Scanning in Embodied Robotic Systems</span>
-                  <div class="paper-authors">
-                    Zhiling Chen, <strong>Yang Zhang</strong>, Fardin Jalil Piran, Qianyu Zhou, Jiong Tang, Farhad Imani
-                  </div>
-                  <div class="paper-venue">arXiv, 2025</div>
-                  
-                  <div class="paper-btn-group">
-                    <a href="https://doi.org/10.48550/arXiv.2505.17295" class="paper-btn">Paper</a>
-                    <a href="https://ed1sonchen.github.io/ScanBot/" class="paper-btn">Website</a>
-                  </div>
-              </td>
-            </tr>
-
-            <tr class="paper-row">
-              <td style="vertical-align:middle">
-                  <a href="images/paper7.png">
-                      <img src='images/paper7.png' class="paper-img" alt="paper thumbnail">
-                  </a>
-              </td>
-              <td style="vertical-align:middle">
-                  <span class="paper-title">Rising Above Uncertainties: An Experimental Investigation on Adaptive Waveguiding Using Locally Resonant Piezoelectric Metasurface</span>
-                  <div class="paper-authors">
-                    Joshua Dupont, <strong>Yang Zhang*</strong>, Ting Wang, Jiong Tang
-                  </div>
-                  <div class="paper-venue">IEEE/ASME Transactions on Mechatronics</div>
-                  <div class="paper-btn-group">
-                    <a href="https://ieeexplore.ieee.org/document/10645328" class="paper-btn">Paper</a>
-                  </div>
-              </td>
-            </tr>
-
-            <tr class="paper-row">
-              <td style="vertical-align:middle">
-                  <a href="images/paper8.png">
-                      <img src='images/paper8.png' class="paper-img" alt="paper thumbnail">
-                  </a>
-              </td>
-              <td style="vertical-align:middle">
-                  <span class="paper-title">Advancing Future Space Habitation: A Cyber-Physical Testbed for Space Power System</span>
-                  <div class="paper-authors">
-                    Hasnain Nisar, Leila Chebbo, Ali M. Bazzi, <strong>Yang Zhang*</strong>, Chuanyu Xue, Jiong Tang, Song Han
-                  </div>
-                  <div class="paper-venue">IEEE Power Electronics Magazine</div>
-                  <div class="paper-btn-group">
-                    <a href="https://ieeexplore.ieee.org/abstract/document/10723169" class="paper-btn">Paper</a>
-                  </div>
-              </td>
-            </tr>
-
-            <tr class="paper-row">
-              <td style="vertical-align:middle">
-                  <a href="images/paper9.png">
-                      <img src='images/paper9.png' class="paper-img" alt="paper thumbnail">
-                  </a>
-              </td>
-              <td style="vertical-align:middle">
-                  <span class="paper-title">Unmanned aerial vehicle-based computer vision for structural vibration measurement and condition assessment</span>
-                  <div class="paper-authors">
-                    Kai Zhou, Zequn Wang, Yi-Qing Ni, <strong>Yang Zhang*</strong>, Jiong Tang
-                  </div>
-                  <div class="paper-venue">Journal of Infrastructure Intelligence and Resilience</div>
-                  <div class="paper-btn-group">
-                    <a href="https://doi.org/10.1016/j.iintel.2023.100031" class="paper-btn">Paper</a>
-                  </div>
-              </td>
-            </tr>
-
-            <tr class="paper-row">
-              <td style="vertical-align:middle">
-                  <a href="images/paper10.png">
-                      <img src='images/paper10.png' class="paper-img" alt="paper thumbnail">
-                  </a>
-              </td>
-              <td style="vertical-align:middle">
-                  <span class="paper-title">A reinforcement learning hyper-heuristic in multi-objective optimization with application to structural damage identification</span>
-                  <div class="paper-authors">
-                    Pei Cao, <strong>Yang Zhang*</strong>, Kai Zhou, Jiong Tang
-                  </div>
-                  <div class="paper-venue">Structural and Multidisciplinary Optimization</div>
-                  <div class="paper-btn-group">
-                    </div>
-              </td>
-            </tr>
-
-            <tr class="paper-row">
-              <td style="vertical-align:middle">
-                  <a href="images/paper11.png">
-                      <img src='images/paper11.png' class="paper-img" alt="paper thumbnail">
-                  </a>
-              </td>
-              <td style="vertical-align:middle">
-                  <span class="paper-title">Mixed-input Bayesian optimization method for structural damage diagnosis</span>
-                  <div class="paper-authors">
-                    Congfang Huang, Jaesung Lee, <strong>Yang Zhang*</strong>, Shiyu Zhou, Jiong Tang
-                  </div>
-                  <div class="paper-venue">IEEE Transactions on Reliability</div>
-                  <div class="paper-btn-group">
-                    <a href="https://ieeexplore.ieee.org/abstract/document/9795926" class="paper-btn">Paper</a>
-                  </div>
-              </td>
-            </tr>
-
-            <tr class="paper-row">
-              <td style="vertical-align:middle">
-                  <a href="images/paper12.png">
-                      <img src='images/paper12.png' class="paper-img" alt="paper thumbnail">
-                  </a>
-              </td>
-              <td style="vertical-align:middle">
-                  <span class="paper-title">Mechanical behavior of composite bistable shell structure and surrogate-based optimal design</span>
-                  <div class="paper-authors">
-                    <strong>Yang Zhang*</strong>, Hongling Ye, Bowen Li, Qingsheng Yang
-                  </div>
-                  <div class="paper-venue">Structural and Multidisciplinary Optimization</div>
-                  <div class="paper-btn-group">
-                    <a href="https://doi.org/10.1007/s00158-021-02890-7" class="paper-btn">Paper</a>
-                  </div>
-              </td>
-            </tr>
-
-            <tr class="paper-row">
-              <td style="vertical-align:middle">
-                  <a href="images/paper13.gif">
-                      <img src='images/paper13.gif' class="paper-img" alt="paper thumbnail">
-                  </a>
-              </td>
-              <td style="vertical-align:middle">
-                  <span class="paper-title">Quasi-static analysis and multi-objective optimization for tape spring hinge</span>
-                  <div class="paper-authors">
-                    Hongling Ye, <strong>Yang Zhang*</strong>, Qingsheng Yang, Bing Zhang
-                  </div>
-                  <div class="paper-venue">Structural and Multidisciplinary Optimization</div>
-                  <div class="paper-btn-group">
-                    <a href="https://doi.org/10.1007/s00158-019-02331-6" class="paper-btn">Paper</a>
-                  </div>
-              </td>
-            </tr>
-
-          </tbody>
-         </table>
+         <p style="padding:20px; color:#666;">(Copy your full list table rows here...)</p>
       </div>
 
       <div class="section-title">Academic Service</div>
@@ -704,33 +308,87 @@
         <li><strong>Journal Reviewer:</strong> SMO, Eng. Struct., KBS, JIMSS, Sci. Rep, J. Comput. Nonlinear Dyn., etc.</li>
       </ul>
 
-      <div class="footer">
-        <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=300&t=tt&d=vx2vOsZRlPKZXmKc8bppfBlX0RHmRudYOCeKf7rBPfM'></script>
-        <p style="font-size:0.8em; color:#ccc; margin-top:20px;">&copy; 2025 Yang Zhang</p>
+      <div class="section-title">Gallery</div>
+      <p style="margin-bottom: 20px; color: var(--text-light);">
+        Beyond research, I enjoy capturing moments through my lens. Here are some of my perspectives.
+      </p>
+      
+      <div class="gallery-grid">
+        
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="images/paper4.png" alt="Hiking in Connecticut"> <div class="gallery-overlay">
+                <div class="gallery-caption">Hiking in Connecticut, 2024</div>
+            </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="images/scholar.png" alt="Conference Presentation"> <div class="gallery-overlay">
+                <div class="gallery-caption">ASME Conference</div>
+            </div>
+        </div>
+
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="images/paperReconstruction.png" alt="Campus View"> <div class="gallery-overlay">
+                <div class="gallery-caption">UConn Campus Winter</div>
+            </div>
+        </div>
+        
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="images/paper2.gif" alt="Lab Setup">
+            <div class="gallery-overlay">
+                <div class="gallery-caption">Experimental Setup</div>
+            </div>
+        </div>
+
+        </div>
+
+      <div style="margin-top: 60px; text-align: center; border-top: 1px solid #eee; padding-top: 20px;">
+        <p style="font-size:0.8em; color:#ccc;">&copy; 2025 Yang Zhang</p>
       </div>
 
     </div>
 
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="">
+        <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+
     <script>
+      // Tab Switching Logic
       function showTab(tabName) {
         const contents = document.querySelectorAll('.research-content');
-        contents.forEach(content => {
-          content.classList.remove('active');
-        });
-        
-        const buttons = document.querySelectorAll('.tab-button');
-        buttons.forEach(button => {
-          button.classList.remove('active');
-        });
+        contents.forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
         
         if (tabName === 'selected') {
           document.getElementById('selected-research').classList.add('active');
-          // 找到第一个按钮并设为 active
           document.querySelector('.tab-button:first-child').classList.add('active');
-        } else if (tabName === 'full') {
+        } else {
           document.getElementById('full-list').classList.add('active');
-          // 找到第二个按钮并设为 active
           document.querySelector('.tab-button:nth-child(2)').classList.add('active');
+        }
+      }
+
+      // Lightbox Logic
+      function openLightbox(element) {
+        const imgSrc = element.querySelector('img').src;
+        const caption = element.querySelector('.gallery-caption').innerText;
+        
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCap = document.getElementById('lightbox-caption');
+        
+        lightboxImg.src = imgSrc;
+        lightboxCap.innerText = caption;
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      }
+
+      function closeLightbox(event) {
+        if (event.target !== document.getElementById('lightbox-img') && event.target.id !== 'lightbox-caption') {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
         }
       }
     </script>
