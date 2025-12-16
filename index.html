@@ -2,589 +2,737 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-    <title>Yang Zhang</title>
+    <title>Yang Zhang - UConn DSC Lab</title>
 
     <meta name="author" content="Yang Zhang">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="images/favicon/zy.png" type="image/png">
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
     
-    <style>
-      .intro {
-        font-size: 1.3em;
-        line-height: 1.4;
-      }
-      .intro a {
-        font-size: inherit;
-      }
-      .contact-links {
-        font-size: 1.1em !important;
-      }
-      .contact-links a {
-        font-size: inherit !important;
-      }
-      p[style*="text-align:center"] a {
-        font-size: inherit !important;
-      }
-      .paper-content {
-        font-size: 1.3em;
-        line-height: 1.4;
-      }
-      .paper-content a {
-        font-size: inherit !important;
-      }
-      papertitle {
-        font-weight: bold;
-      }
-             strong {
-         font-size: inherit !important;
-         font-weight: bold;
-       }
-       
-       .research-tabs {
-         text-align: center;
-         margin: 20px 0;
-       }
-       
-       .tab-button {
-         background: #f8f9fa;
-         border: 2px solid #e9ecef;
-         padding: 5px 10px;
-         margin: 0 3px;
-         border-radius: 15px;
-         cursor: pointer;
-         font-size: 0.65em;
-         font-weight: 500;
-         transition: all 0.3s ease;
-         color: #495057;
-       }
-       
-       .tab-button:hover {
-         background: #e9ecef;
-         transform: translateY(-2px);
-       }
+    <link rel="icon" href="images/favicon/zy.png" type="image/png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-       .tab-button.active {
-         background: linear-gradient(135deg, #CC66DA, #3D74B6);
-         color: white;
-         border-color: #FFFFFF;
-       }
-       
-       .research-content {
-         display: none;
-         animation: fadeIn 0.5s ease-in-out;
-       }
-       
-       .research-content.active {
-         display: block;
-       }
-       
-       @keyframes fadeIn {
-         from { opacity: 0; transform: translateY(10px); }
-         to { opacity: 1; transform: translateY(0); }
-       }
+    <style>
+      /* --- 全局变量与基础设置 --- */
+      :root {
+        --primary-color: #3D74B6;       /* 主色调：稳重的学术蓝 */
+        --accent-color: #CC66DA;        /* 强调色：紫罗兰渐变用 */
+        --text-main: #2c3e50;           /* 正文深灰 */
+        --text-light: #64748b;          /* 辅助文字浅灰 */
+        --bg-color: #fafafa;            /* 整体背景极淡的灰 */
+        --card-bg: #ffffff;             /* 卡片纯白背景 */
+        --hover-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1.6;
+        margin: 0;
+        padding: 40px 20px;
+      }
+
+      /* 链接基础样式 */
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+      a:hover {
+        color: var(--accent-color);
+      }
+
+      /* 布局容器 */
+      .container {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      /* --- 头部 Hero Section 优化 --- */
+      .header-table {
+        margin-bottom: 40px;
+        width: 100%;
+      }
+      
+      .name-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8em;
+        font-weight: 700;
+        margin-bottom: 10px;
+        background: linear-gradient(135deg, var(--text-main) 30%, var(--primary-color) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.02em;
+      }
+
+      .intro-text {
+        font-size: 1.05em;
+        color: var(--text-main);
+        text-align: justify;
+      }
+
+      /* 头像美化 */
+      .profile-img-container {
+        position: relative;
+        padding: 10px;
+      }
+      
+      .profile-img {
+        width: 240px;
+        height: 240px;
+        object-fit: cover;
+        border-radius: 50%; /* 圆形头像 */
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* 柔和阴影 */
+        border: 4px solid #fff;
+        transition: transform 0.3s ease;
+      }
+      
+      .profile-img:hover {
+        transform: scale(1.03) rotate(2deg);
+      }
+
+      /* 社交链接按钮化 */
+      .social-links {
+        margin-top: 20px;
+        display: flex;
+        gap: 15px;
+        justify-content: center; /* 居中对齐 */
+      }
+
+      .social-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 50px;
+        font-size: 0.9em;
+        color: var(--text-main);
+        font-weight: 500;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        transition: all 0.2s;
+      }
+
+      .social-btn:hover {
+        background: var(--primary-color);
+        color: #fff;
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(61, 116, 182, 0.3);
+      }
+      
+      .social-btn i { font-size: 1.1em; }
+
+
+      /* --- 章节标题 --- */
+      .section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8em;
+        font-weight: 700;
+        margin-top: 50px;
+        margin-bottom: 25px;
+        color: var(--text-main);
+        border-bottom: 2px solid #eaeaea;
+        padding-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+
+      /* --- News 列表 --- */
+      .news-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .news-list li {
+        margin-bottom: 12px;
+        padding-left: 20px;
+        position: relative;
+        color: var(--text-main);
+        font-size: 0.95em;
+      }
+      .news-list li::before {
+        content: "•";
+        color: var(--accent-color);
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        top: 0px;
+        font-size: 1.2em;
+      }
+      .news-date {
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-right: 5px;
+      }
+
+      /* --- 论文列表 (Fancy Cards) --- */
+      .paper-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 20px; /* 卡片之间的垂直间距 */
+      }
+
+      .paper-row {
+        background: var(--card-bg);
+        transition: all 0.3s ease;
+      }
+      
+      /* 让 TR 看起来像卡片的核心黑科技 */
+      .paper-row td {
+        border-top: 1px solid #f0f0f0;
+        border-bottom: 1px solid #f0f0f0;
+        padding: 25px;
+        background: #fff;
+      }
+      .paper-row td:first-child {
+        border-left: 1px solid #f0f0f0;
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
+        width: 30%; /* 调整图片列宽 */
+      }
+      .paper-row td:last-child {
+        border-right: 1px solid #f0f0f0;
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+      }
+
+      /* 悬停效果 */
+      .paper-row:hover td {
+        border-color: transparent; /* 悬浮时隐藏边框 */
+        background: #fff;
+        transform: translateY(-4px); /* 整体上浮 */
+        /* 由于 tr 不能直接 transform, 我们让 td 配合阴影看起来像整体移动 */
+        box-shadow: var(--hover-shadow);
+        z-index: 10;
+        position: relative;
+      }
+      
+      .paper-img {
+        width: 100%;
+        border-radius: 6px;
+        border: 1px solid #eee;
+        transition: all 0.3s;
+      }
+      .paper-row:hover .paper-img {
+        transform: scale(1.02);
+      }
+
+      .paper-title {
+        font-weight: 600;
+        font-size: 1.15em;
+        color: var(--text-main);
+        display: block;
+        margin-bottom: 8px;
+        line-height: 1.3;
+      }
+      
+      .paper-authors {
+        color: var(--text-light);
+        font-size: 0.95em;
+        margin-bottom: 6px;
+      }
+      
+      .paper-venue {
+        font-style: italic;
+        color: var(--text-main);
+        font-weight: 500;
+        margin-bottom: 12px;
+      }
+
+      /* 论文链接按钮 (Badge Style) */
+      .paper-btn-group {
+        margin-top: 8px;
+      }
+      .paper-btn {
+        display: inline-block;
+        padding: 4px 10px;
+        margin-right: 6px;
+        margin-bottom: 5px;
+        font-size: 0.75em;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--primary-color);
+        background-color: rgba(61, 116, 182, 0.08); /* 极淡的蓝色背景 */
+        border-radius: 4px;
+        border: 1px solid rgba(61, 116, 182, 0.2);
+        transition: all 0.2s;
+      }
+      .paper-btn:hover {
+        background-color: var(--primary-color);
+        color: #fff;
+        border-color: var(--primary-color);
+        box-shadow: 0 4px 6px rgba(61, 116, 182, 0.2);
+      }
+
+      /* --- Tabs 按钮优化 --- */
+      .tab-container {
+        font-size: 0.5em; /* 基于 h1 的比例 */
+        vertical-align: middle;
+        display: inline-block;
+        margin-left: 20px;
+      }
+      
+      .tab-button {
+        background: transparent;
+        border: 1px solid #e2e8f0;
+        padding: 6px 16px;
+        margin: 0 2px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--text-light);
+        transition: all 0.3s ease;
+      }
+      
+      .tab-button:hover {
+        background: #f1f5f9;
+        color: var(--primary-color);
+      }
+
+      .tab-button.active {
+        background: linear-gradient(135deg, var(--primary-color), #5b8dc9);
+        color: white;
+        border-color: transparent;
+        box-shadow: 0 4px 10px rgba(61, 116, 182, 0.3);
+      }
+      
+      .research-content {
+        display: none;
+        animation: fadeIn 0.6s ease;
+      }
+      .research-content.active {
+        display: block;
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Footer */
+      .footer {
+        margin-top: 60px;
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+      }
+
+      /* 移动端适配 */
+      @media (max-width: 768px) {
+        body { padding: 20px 10px; }
+        .header-table td { 
+          display: block; 
+          width: 100% !important; 
+          text-align: center;
+        }
+        .profile-img { width: 180px; height: 180px; margin-bottom: 20px; }
+        .intro-text { text-align: left; }
+        .social-links { justify-content: center; flex-wrap: wrap; }
+        
+        .paper-row td {
+            display: block;
+            width: 100% !important;
+            border: none;
+        }
+        .paper-row td:first-child {
+            border-top: 1px solid #f0f0f0;
+            border-left: 1px solid #f0f0f0;
+            border-right: 1px solid #f0f0f0;
+            border-bottom: none;
+            border-radius: 12px 12px 0 0;
+            padding-bottom: 0;
+        }
+        .paper-row td:last-child {
+            border-bottom: 1px solid #f0f0f0;
+            border-left: 1px solid #f0f0f0;
+            border-right: 1px solid #f0f0f0;
+            border-radius: 0 0 12px 12px;
+        }
+        .paper-img { width: 100%; max-width: 300px; margin: 0 auto; display: block; }
+      }
     </style>
   </head>
 
   <body>
-    <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-      <tr style="padding:0px">
-        <td style="padding:0px">
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr style="padding:0px">
-              <td style="padding:2.5%;width:37%;max-width:37%">
-                <a href="images/scholar.png"><img style="width:100%;max-width:100%;object-fit: cover;" alt="profile photo" src="images/scholar.png" class="hoverZoomLink"></a>
-              </td>
-              <td style="padding:2.5%;width:63%;vertical-align:middle">
-                <p class="name" style="text-align: center; font-size: 2.5em;">
-                Yang Zhang&nbsp;&nbsp;&nbsp;&nbsp;<!-- <span class="chinese-name">张焯扬</span> -->
+    <div class="container">
+      
+      <table class="header-table">
+        <tbody>
+          <tr>
+            <td style="width:35%; vertical-align:middle; text-align:center;">
+              <div class="profile-img-container">
+                <a href="images/scholar.png">
+                  <img src="images/scholar.png" alt="Yang Zhang Profile" class="profile-img">
+                </a>
+              </div>
+            </td>
+            
+            <td style="width:65%; vertical-align:middle; padding-left: 30px;">
+              <div class="name-title">Yang Zhang</div>
+              
+              <div class="intro-text">
+                <p>
+                  I'm a Postdoctoral Researcher at <a href="https://dscl.uconn.edu/">UConn DSC lab</a>, advised by Prof. <a href="https://dscl.uconn.edu/director/">Jiong Tang</a>. I received my Ph.D. in Mechanical Engineering from University of Connecticut in December 2024.
                 </p>
-				<p class="intro">
-					I'm a Postdoctoral Researcher at <a href="https://dscl.uconn.edu/">UConn DSC lab</a>, advised by Prof. <a href="https://dscl.uconn.edu/director/">Jiong Tang</a>. I received my Ph.D. in Mechanical Engineering from University of Connecticut in December 2024. My research interests lie in Computational Intelligence, AI-driven Engineering, Digital Twin, Inverse Analysis and Optimization, and Mechatronics Synthesis.
-				</p>
+                <p>
+                  My research interests lie in <strong>Computational Intelligence, AI-driven Engineering, Digital Twin, and Inverse Analysis</strong>. I develop intelligent optimization methods and integrate them with physics-based modeling to create robust engineering analysis tools.
+                </p>
+              </div>
 
-				<p class="intro">
-					My research follows a three-tier approach: At the algorithmic level, I develop intelligent optimization methods including reinforcement learning-guided strategies, multi-agent coordination, and sparse representation techniques to enhance computational efficiency and accuracy. At the technical system level, I integrate these algorithms with physics-based modeling, sensor technologies, and machine learning frameworks to create robust engineering analysis tools. At the application level, I deploy these integrated solutions to tackle complex problems in prognostics and health management (PHM), metamaterials and intelligent structures, advanced manufacturing, bio-mechatronics, and inverse analysis across diverse engineering domains.
-				</p>
-				<p class="contact-links" style="text-align:center;">
-					<a href="mailto:yang.3.zhang@uconn.edu">Email</a> &nbsp;|&nbsp;
-					<a href="https://scholar.google.com/citations?user=NPhTb-wAAAAJ&hl=en&authuser=1">Google Scholar</a> &nbsp;|&nbsp;
-					<a href="https://www.linkedin.com/in/yang-zhang-16822223a/">Linkedin</a> &nbsp;|&nbsp;
-				</p>
-				</td>
-				</tr>
-				</tbody></table>
+              <div class="social-links">
+                <a href="mailto:yang.3.zhang@uconn.edu" class="social-btn">
+                  <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="https://scholar.google.com/citations?user=NPhTb-wAAAAJ&hl=en&authuser=1" class="social-btn">
+                  <i class="fas fa-graduation-cap"></i> Scholar
+                </a>
+                <a href="https://www.linkedin.com/in/yang-zhang-16822223a/" class="social-btn">
+                  <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-				<!-- News部分开始 -->
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-				<tr>
-					<td style="padding:16px;width:100%;vertical-align:middle">
-						<h1>News & Updates</h1>
-					</td>
-				</tr>
-				</tbody></table>
-				<table style="width:100%;border:0px;border-spacing:0px 5px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-				<tr>
-					<td class="paper-content" style="padding: 0px 20px 5px 20px;">
-						<ul style="margin: 0; padding-left: 20px; list-style-type: none;">
-							<li style="margin-bottom: 8px;"><strong>Sep 26 2025:</strong> Gave a talk at UConn CMSC webinar on "Toward Computational Intelligence in Digital Twin for Industrial 4.0​"</li>
-							<li style="margin-bottom: 8px;"><strong>Sep 11 2025:</strong> Paper-Less Can Be More: Dictionary-Driven Reconstruction of Full-Field Measurements from Optimally Configured Sensor Network was accepted by MSSP.</li>
-							<li style="margin-bottom: 8px;"><strong>Aug 17 2025:</strong> Attended ASME IDETC-CIE 2025 conference and made presentation about wind turbine inspection using VLM</li>
-							<li style="margin-bottom: 8px;"><strong>May 2025:</strong> Paper accepted to ASME Letters in Dynamic Systems and Control</li>
-							<li style="margin-bottom: 8px;"><strong>Jan 2025:</strong> Paper accepted to AIAA Journal</li>
-							<li style="margin-bottom: 8px;"><strong>Jan 2025:</strong> Started postdoctoral position at UConn DSC lab</li>
-							
-						</ul>
-					</td>
-				</tr>
-				</tbody></table>
-				<!-- News部分结束 -->
+      <div class="section-title">News & Updates</div>
+      <ul class="news-list">
+        <li><span class="news-date">Sep 2025:</span> Gave a talk at UConn CMSC webinar on "Toward Computational Intelligence in Digital Twin for Industrial 4.0".</li>
+        <li><span class="news-date">Sep 2025:</span> Paper "Paper-Less Can Be More" was accepted by <strong>MSSP</strong>.</li>
+        <li><span class="news-date">Aug 2025:</span> Attended ASME IDETC-CIE 2025 conference and presented on wind turbine inspection.</li>
+        <li><span class="news-date">May 2025:</span> Paper accepted to <strong>ASME Letters in Dynamic Systems and Control</strong>.</li>
+        <li><span class="news-date">Jan 2025:</span> Paper accepted to <strong>AIAA Journal</strong>.</li>
+        <li><span class="news-date">Jan 2025:</span> Started postdoctoral position at UConn DSC lab.</li>
+      </ul>
 
-				<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-				<tr>
-				<td style="padding:16px;width:100%;vertical-align:middle">
-					<h1>Research
-						<button class="tab-button active" onclick="showTab('selected')">selected</button>
-						<button class="tab-button" onclick="showTab('full')">all</button>
-					</h1>
-				</td>
-				</tr>
-				</tbody></table>
-                     <div id="selected-research" class="research-content active">
-           <table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-<!-- 这是paper 1 -->
-          <tr>
-              <td style="padding:10px;width:45%;vertical-align:middle">
-                  <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                      <a href="images/paperReconstruction.png">
-                          <img src='images/paperReconstruction.png' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                      </a>
-                  </div>
+      <div class="section-title">
+        Research
+        <div class="tab-container">
+          <button class="tab-button active" onclick="showTab('selected')">Selected</button>
+          <button class="tab-button" onclick="showTab('full')">All Publications</button>
+        </div>
+      </div>
+
+      <div id="selected-research" class="research-content active">
+        <table class="paper-table">
+          <tbody>
+            
+            <tr class="paper-row">
+              <td style="vertical-align:middle">
+                  <a href="images/paperReconstruction.png">
+                      <img src='images/paperReconstruction.png' class="paper-img" alt="paper thumbnail">
+                  </a>
               </td>
-              <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                  <papertitle>Less Can Be More: Dictionary-driven reconstruction of full-field measurements from optimally configured sensor network</papertitle>
-                  <br>
-                  <strong>Yang Zhang</strong>,&nbspJoshua Dupont,&nbspQianyu Zhou,&nbspJiong Tang
+              <td style="vertical-align:middle">
+                  <span class="paper-title">Less Can Be More: Dictionary-driven reconstruction of full-field measurements from optimally configured sensor network</span>
+                  <div class="paper-authors">
+                    <strong>Yang Zhang</strong>, Joshua Dupont, Qianyu Zhou, Jiong Tang
+                  </div>
+                  <div class="paper-venue">Mechanical Systems and Signal Processing, 2025</div>
                   
-                  <br>
-                  <em>Mechanical Systems and Signal Processing</em>
-                  <br>
-                  <a href="https://doi.org/10.1016/j.ymssp.2025.113340">[paper]</a>
-                  <!-- <a href="https://github.com/mit-han-lab/vila-u">[code]</a> -->
-                  <!-- <a href="https://vila-u.hanlab.ai/">[online demo]</a> -->
-              </td>
-          </tr>
-		  
-<!-- 这是paper 2 -->
-          <tr>
-            <td style="padding:10px;width:45%;vertical-align:middle">
-                <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                    <a href="images/paper2.gif">
-                        <img src='images/paper2.gif' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                    </a>
-                </div>
-            </td>
-            <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                <papertitle>Harnessing collaborative learning automata to guide multi-objective optimization based inverse analysis for structural damage identification</papertitle>
-                <br>
-                <strong>Yang Zhang</strong>,&nbspKai Zhou,&nbspJiong Tang
-                
-                <br>
-                <em>Applied Soft Computing</em>
-                <br>
-                <a href="https://doi.org/10.1016/j.asoc.2024.111697">[paper]</a>
-                <!-- <a href="https://github.com/mit-han-lab/efficientvit">[code]</a> -->
-                <!--<a href="https://evitsam.hanlab.ai/">[online demo]</a> -->
-            </td>
-          </tr>
-
-<!-- 这是paper 3 -->
-          <tr>
-            <td style="padding:10px;width:45%;vertical-align:middle">
-                <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                    <a href="images/paper3.gif">
-                        <img src='images/paper3.gif' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                    </a>
-                </div>
-            </td>
-            <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                <papertitle>Piezoelectric impedance-based high-accuracy damage identification using sparsity conscious multi-objective optimization inverse analysis</papertitle>
-                <br>
-                <strong>Yang Zhang</strong>,&nbspKai Zhou,&nbspJiong Tang
-                
-                <br>
-                <em>Mechanical Systems and Signal Processing</em>
-                <br>
-                <a href="https://doi.org/10.1016/j.ymssp.2023.111093">[paper]</a>
-                <!-- <a href="https://sudo-ai-3d.github.io/One2345plus_page/">[website]</a> -->
-            </td>
-          </tr>
-		  
-<!-- 这是paper 4 -->
-          <tr>
-            <td style="padding:10px;width:45%;vertical-align:middle">
-                <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                    <a href="images/paper4.png">
-                        <img src='images/paper4.png' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                    </a>
-                </div>
-            </td>
-            <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                <papertitle>Piezoelectric Impedance-Based Structural Damage Identification Empowered With Tunable Circuitry Integration and Multi-Objective Optimization-Based Inverse Analysis</papertitle>
-                <br>
-                <strong>Yang Zhang*</strong>,&nbspJoshua Dupont, &nbspTing Wang, &nbspJiong Tang
-                
-                <br>
-                <em>Journal of Vibration and Acoustics</em>
-                <br>
-                <a href=" https://doi.org/10.1115/1.4066311">[paper]</a>
-                <!-- <a href="https://github.com/dongyh20/C2P?tab=readme-ov-file/">[code]</a> -->
-            </td>
-          </tr>
-
-                     </tbody></table>
-           </div>
-           
-           <div id="full-list" class="research-content">
-           <table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-
-<!-- 这里是展示selected之外的 paper 5 -->
-          <tr>
-              <td style="padding:10px;width:45%;vertical-align:middle">
-                  <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                      <a href="images/paper5.png">
-                          <img src='images/paper5.png' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                      </a>
-                  </div>
-              </td>
-              <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                  <papertitle>High-Frequency Active Interrogation for Structural Damage Identification Enabled by Intelligent Hierarchical Search</papertitle>
-                  <br>
-                  <strong>Yang Zhang*</strong>, &nbspJiong Tang
-                  <br>
-                  <em>AIAA Journal</em>
-                  <br>
-                  <a href="https://doi.org/10.2514/1.J064863">[paper]</a>
-                  <!-- <a href="https://cot-vla.github.io">[website]</a> -->
-              </td>
-          </tr>
-
-<!-- 这里是展示selected之外的 paper 6 -->
-          <tr>
-              <td style="padding:10px;width:45%;vertical-align:middle">
-                  <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                      <a href="images/paper1.png">
-                          <img src='images/paper1.png' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                      </a>
-                  </div>
-              </td>
-              <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                  <papertitle>Discriminative Feature Extraction Through Dictionary Learning for Piezoelectric Admittance-Based Bolt-Loosening Damage Detection</papertitle>
-                  <br>
-                  <strong>Yang Zhang</strong>,&nbspQianyu Zhou,&nbspJiong Tang
-                  
-                  <br>
-                  <em>ASME Letters in Dynamic Systems and Control</em>
-                  <br>
-                  <a href="https://doi.org/10.1115/1.4068353">[paper]</a>
-                  <!-- <a href="https://github.com/mit-han-lab/vila-u">[code]</a> -->
-                  <!-- <a href="https://vila-u.hanlab.ai/">[online demo]</a> -->
-              </td>
-          </tr>
-
-
-          <tr>
-            <td style="padding:10px;width:45%;vertical-align:middle">
-                <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                    <a href="images/paper6.png">
-                        <img src='images/paper6.png' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                    </a>
-                </div>
-            </td>
-            <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                <papertitle>ScanBot: Towards Intelligent Surface Scanning in Embodied Robotic Systems</papertitle>
-                <br>
-                Zhiling Chen, &nbsp<strong>Yang Zhang</strong>, &nbspFardin Jalil Piran, &nbspQianyu Zhou, &nbspJiong Tang, &nbspFarhad Imani
-                
-                <br>
-                <em>arXiv</em>
-                <br>
-                <a href="https://doi.org/10.48550/arXiv.2505.17295">[paper]</a> 
-                <!-- <a href="https://github.com/NVlabs/VILA">[code]</a> -->
-                <!-- <a href="https://vila.mit.edu/">[demo]</a> -->
-                <a href="https://ed1sonchen.github.io/ScanBot/">[website]</a>
-            </td>
-        </tr>
- 
-<!-- 这里是展示selected之外的 paper 7 --> 
-           <tr>
-             <td style="padding:10px;width:45%;vertical-align:middle">
-                 <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                     <a href="images/paper7.png">
-                         <img src='images/paper7.png' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                     </a>
-                 </div>
-             </td>
-             <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                 <papertitle>Rising Above Uncertainties: An Experimental Investigation on Adaptive Waveguiding Using Locally Resonant Piezoelectric Metasurface</papertitle>
-                 <br>
-                 Joshua Dupont, &nbsp<strong>Yang Zhang*</strong>,&nbspTing Wang, &nbspJiong Tang
-                 
-                 <br>
-                 <em>IEEE/ASME Transactions on Mechatronics</em>
-                 <br>
-                 <a href="https://ieeexplore.ieee.org/document/10645328">[paper]</a>
-                 <!-- <a href="https://github.com/mit-han-lab/vila-u">[code]</a> -->
-                 <!-- <a href="https://vila-u.hanlab.ai/">[online demo]</a> -->
-             </td>
-           </tr>
-
-<!-- 这里是展示selected之外的 paper 8 -->
-           <tr>
-            <td style="padding:10px;width:45%;vertical-align:middle">
-                <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                    <a href="images/paper8.png">
-                        <img src='images/paper8.png' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                    </a>
-                </div>
-            </td>
-            <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                <papertitle>Advancing Future Space Habitation: A Cyber-Physical Testbed for Space Power System</papertitle>
-                <br>
-                Hasnain Nisar, &nbspLeila Chebbo, ,&nbspAli M. Bazzi, &nbsp<strong>Yang Zhang*</strong>, ,&nbspChuanyu Xue, ,&nbspJiong Tang, and ,&nbspSong Han.
-                
-                <br>
-                <em>IEEE Power Electronics Magazine</em>
-                <br>
-                <a href="https://ieeexplore.ieee.org/abstract/document/10723169">[paper]</a>
-                <!-- <a href="https://github.com/mit-han-lab/hart">[code]</a> -->
-                <!-- <a href="https://hart.hanlab.ai/">[online demo]</a> -->
-            </td>
-          </tr>
-
-<!-- 这里是展示selected之外的 paper 9 -->
-           <tr>
-             <td style="padding:10px;width:45%;vertical-align:middle">
-                 <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                     <a href="images/paper9.png">
-                         <img src='images/paper9.png' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                     </a>
-                 </div>
-             </td>
-             <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                 <papertitle>Unmanned aerial vehicle-based computer vision for structural vibration measurement and condition assessment: A concise survey</papertitle>
-                 <br>
-                 Kai Zhou, &nbspZequn Wang, &nbspYi-Qing Ni, &nbsp<strong>Yang Zhang*</strong>, &nbspJiong Tang
-                 
-                 <br>
-                 <em>Journal of Infrastructure Intelligence and Resilience</em>
-                 <br>
-                 <a href="https://doi.org/10.1016/j.iintel.2023.100031">[paper]</a>
-                 <!-- <a href="https://github.com/mit-han-lab/efficientvit">[code]</a> -->
-                 <!-- <a href="https://evitsam.hanlab.ai/">[online demo]</a> -->
-             </td>
-           </tr>
-
-<!-- 这里是展示selected之外的 paper 10 -->
-          <tr>
-            <td style="padding:10px;width:45%;vertical-align:middle">
-                <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                    <a href="images/paper10.png">
-                        <img src='images/paper10.png' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                    </a>
-                </div>
-            </td>
-            <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                <papertitle>A reinforcement learning hyper-heuristic in multi-objective optimization with application to structural damage identification</papertitle>
-                <br>
-                Pei Cao, &nbsp<strong>Yang Zhang*</strong>, &nbspKai Zhou, &nbspJiong Tang
-                
-                <br>
-                <em>Structural and Multidisciplinary Optimization</em>
-                <br>
-                <!-- <a href="https://doi.org/10.1007/s00158-022-03432-5">[paper]</a> -->
-                <!-- <a href="https://github.com/mit-han-lab/sparserefine">[code]</a> -->
-            </td>
-          </tr>
-
-<!-- 这里是展示selected之外的 paper 11 -->
-           <tr>
-             <td style="padding:10px;width:45%;vertical-align:middle">
-                 <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                     <a href="images/paper11.png">
-                         <img src='images/paper11.png' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                     </a>
-                 </div>
-             </td>
-             <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                 <papertitle>Mixed-input Bayesian optimization method for structural damage diagnosis</papertitle>
-                 <br>
-                 Congfang Huang, &nbspJaesung Lee, &nbsp<strong>Yang Zhang*</strong>, &nbspShiyu Zhou, &nbspJiong Tang
-                 
-                 <br>
-                 <em>IEEE Transactions on Reliability</em>
-                 <br>
-                 <a href="https://ieeexplore.ieee.org/abstract/document/9795926">[paper]</a>
-                 <!-- <a href="https://sudo-ai-3d.github.io/One2345plus_page/">[website]</a> -->
-             </td>
-           </tr>
-
-<!-- 这里是展示selected之外的 paper 12 -->
-           <tr>
-            <td style="padding:10px;width:45%;vertical-align:middle">
-                <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                    <a href="images/paper12.png">
-                        <img src='images/paper12.png' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                    </a>
-                </div>
-            </td>
-            <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                <papertitle>Mechanical behavior of composite bistable shell structure and surrogate-based optimal design</papertitle>
-                <br>
-                <strong>Yang Zhang*</strong>, &nbspHongling Ye, &nbspBowen Li, &nbspQingsheng Yang
-                
-                <br>
-                <em>Structural and Multidisciplinary Optimization</em>
-                <br>
-                <a href="https://doi.org/10.1007/s00158-021-02890-7">[paper]</a>
-                <!-- <a href="https://github.com/SUDO-AI-3D/zero123plus/">[code]</a> -->
-            </td>
-          </tr>
-
-<!-- 这里是展示selected之外的 paper 13 -->
-           <tr>
-             <td style="padding:10px;width:45%;vertical-align:middle">
-                 <div class="one" style="display:flex;align-items:center;height:100%;width:100%;">
-                     <a href="images/paper13.gif">
-                         <img src='images/paper13.gif' class="hoverZoomLink" style="width: 100%; vertical-align:middle;">
-                     </a>
-                 </div>
-             </td>
-             <td class="paper-content" style="padding:20px;width:55%;vertical-align:top">
-                 <papertitle>Quasi-static analysis and multi-objective optimization for tape spring hinge</papertitle>
-                 <br>
-                 Hongling Ye, &nbsp<strong>Yang Zhang*</strong>, &nbspQingsheng Yang, &nbspBing Zhang
-                 
-                 <br>
-                 <em>Structural and Multidisciplinary Optimization</em>
-                 <br>
-                 <a href="https://doi.org/10.1007/s00158-019-02331-6">[paper]</a>
-                 <!-- <a href="https://github.com/dongyh20/C2P?tab=readme-ov-file/">[code]</a> -->
-             </td>
-           </tr>
-
-
-           </tbody></table>
-           </div>
-
-<!-- 这里paper结束的地方 -->
-
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:16px;width:100%;vertical-align:middle">
-                <h1>Academic Service</h1>
+                  <div class="paper-btn-group">
+                    <a href="https://doi.org/10.1016/j.ymssp.2025.113340" class="paper-btn">Paper</a>
+                    </div>
               </td>
             </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px 5px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td class="paper-content" style="padding: 0px 20px 5px 20px;">
-                <ul style="margin: 0; padding-left: 20px;">
-                  <li><strong>Journal Reviewer:</strong> SMO, Eng. Struct., KBS, JIMSS, Sci. Rep, J. Comput. Nonlinear Dyn., etc.</li>
-                </ul>
+
+            <tr class="paper-row">
+              <td style="vertical-align:middle">
+                  <a href="images/paper2.gif">
+                      <img src='images/paper2.gif' class="paper-img" alt="paper thumbnail">
+                  </a>
+              </td>
+              <td style="vertical-align:middle">
+                  <span class="paper-title">Harnessing collaborative learning automata to guide multi-objective optimization based inverse analysis</span>
+                  <div class="paper-authors">
+                    <strong>Yang Zhang</strong>, Kai Zhou, Jiong Tang
+                  </div>
+                  <div class="paper-venue">Applied Soft Computing, 2024</div>
+                  
+                  <div class="paper-btn-group">
+                    <a href="https://doi.org/10.1016/j.asoc.2024.111697" class="paper-btn">Paper</a>
+                  </div>
               </td>
             </tr>
-          </tbody></table>
 
-          <!-- <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-             <tr>
-               <td style="padding:16px;width:100%;vertical-align:middle">
-                 <h1>Experience</h1>
-               </td>
-             </tr>
-           </tbody></table>
-           <table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+            <tr class="paper-row">
+              <td style="vertical-align:middle">
+                  <a href="images/paper3.gif">
+                      <img src='images/paper3.gif' class="paper-img" alt="paper thumbnail">
+                  </a>
+              </td>
+              <td style="vertical-align:middle">
+                  <span class="paper-title">Piezoelectric impedance-based high-accuracy damage identification using sparsity conscious multi-objective optimization</span>
+                  <div class="paper-authors">
+                    <strong>Yang Zhang</strong>, Kai Zhou, Jiong Tang
+                  </div>
+                  <div class="paper-venue">Mechanical Systems and Signal Processing, 2023</div>
+                  
+                  <div class="paper-btn-group">
+                    <a href="https://doi.org/10.1016/j.ymssp.2023.111093" class="paper-btn">Paper</a>
+                  </div>
+              </td>
+            </tr>
 
-             <tr>
-               <td style="padding:20px;width:25%;vertical-align:middle">
-                 <div class="one">
-                   <a href="https://www.mit.edu/"><img src='images/MIT_Seal.svg' alt="MIT logo" style="width:100%;max-width:100%;"></a>
-                 </div>
-               </td>
-               <td class="paper-content" style="padding:20px;width:75%;vertical-align:middle">
-                 <papertitle>Massachusetts Institute of Technology</papertitle>
-                 <br>
-                 <div style="padding-bottom: 4px;">2024.09 - Present</div>
-                 Ph.D student in Computer Science
-                 <br>
-                 Advisor: Prof. <a href="https://hanlab.mit.edu/songhan/">Song Han</a>
-               </td>
-             </tr>
+            <tr class="paper-row">
+              <td style="vertical-align:middle">
+                  <a href="images/paper4.png">
+                      <img src='images/paper4.png' class="paper-img" alt="paper thumbnail">
+                  </a>
+              </td>
+              <td style="vertical-align:middle">
+                  <span class="paper-title">Piezoelectric Impedance-Based Structural Damage Identification Empowered With Tunable Circuitry Integration</span>
+                  <div class="paper-authors">
+                    <strong>Yang Zhang*</strong>, Joshua Dupont, Ting Wang, Jiong Tang
+                  </div>
+                  <div class="paper-venue">Journal of Vibration and Acoustics, 2024</div>
+                  
+                  <div class="paper-btn-group">
+                    <a href="https://doi.org/10.1115/1.4066311" class="paper-btn">Paper</a>
+                  </div>
+              </td>
+            </tr>
 
-             <tr>
-               <td style="padding:20px;width:25%;vertical-align:middle">
-                 <div class="one">
-                   <a href="https://www.tsinghua.edu.cn/"><img src='images/Tsinghua_University_Logo.svg' alt="Tsinghua logo" style="width:100%;max-width:100%;"></a>
-                 </div>
-               </td>
-               <td class="paper-content" style="padding:20px;width:75%;vertical-align:middle">
-                 <papertitle>Tsinghua University</papertitle>
-                 <br>
-                 <div style="padding-bottom: 4px;">2020.08 - 2024.06</div>
-                 B.Eng. in Computer Science, <a href="https://iiis.tsinghua.edu.cn/en/yaoclass/">Yao Class</a>
-                 <br>
-                 Advisor: Prof. <a href="https://ericyi.github.io/">Li Yi</a>
-               </td>
-             </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div id="full-list" class="research-content">
+         <table class="paper-table">
+          <tbody>
 
-             <tr>
-               <td style="padding:20px;width:25%;vertical-align:middle">
-                 <div class="one">
-                   <a href="https://ucsd.edu/"><img src='images/Seal_of_the_University_of_California,_San_Diego.svg' alt="UCSD logo" style="width:100%;max-width:100%;"></a>
-                 </div>
-               </td>
-               <td class="paper-content" style="padding:20px;width:75%;vertical-align:middle">
-                 <papertitle>UC San Diego</papertitle>
-                 <br>
-                 <div style="padding-bottom: 4px;">2023.06 - 2023.10</div>
-                 Research Intern
-                 <br>
-                 Advisor: Prof. <a href="https://cseweb.ucsd.edu/~haosu/">Hao Su</a>
-               </td>
-             </tr> -->
+            <tr class="paper-row">
+                <td style="vertical-align:middle">
+                    <a href="images/paper5.png">
+                        <img src='images/paper5.png' class="paper-img" alt="paper thumbnail">
+                    </a>
+                </td>
+                <td style="vertical-align:middle">
+                    <span class="paper-title">High-Frequency Active Interrogation for Structural Damage Identification Enabled by Intelligent Hierarchical Search</span>
+                    <div class="paper-authors">
+                      <strong>Yang Zhang*</strong>, Jiong Tang
+                    </div>
+                    <div class="paper-venue">AIAA Journal</div>
+                    <div class="paper-btn-group">
+                      <a href="https://doi.org/10.2514/1.J064863" class="paper-btn">Paper</a>
+                    </div>
+                </td>
+            </tr>
+  
+            <tr class="paper-row">
+                <td style="vertical-align:middle">
+                    <a href="images/paper1.png">
+                        <img src='images/paper1.png' class="paper-img" alt="paper thumbnail">
+                    </a>
+                </td>
+                <td style="vertical-align:middle">
+                    <span class="paper-title">Discriminative Feature Extraction Through Dictionary Learning for Piezoelectric Admittance-Based Bolt-Loosening Damage Detection</span>
+                    <div class="paper-authors">
+                      <strong>Yang Zhang</strong>, Qianyu Zhou, Jiong Tang
+                    </div>
+                    <div class="paper-venue">ASME Letters in Dynamic Systems and Control</div>
+                    <div class="paper-btn-group">
+                      <a href="https://doi.org/10.1115/1.4068353" class="paper-btn">Paper</a>
+                    </div>
+                </td>
+            </tr>
 
-            </tbody></table>
-         </td>
-       </tr>
-          </table>
+            <tr class="paper-row">
+              <td style="vertical-align:middle">
+                  <a href="images/paper6.png">
+                      <img src='images/paper6.png' class="paper-img" alt="paper thumbnail">
+                  </a>
+              </td>
+              <td style="vertical-align:middle">
+                  <span class="paper-title">ScanBot: Towards Intelligent Surface Scanning in Embodied Robotic Systems</span>
+                  <div class="paper-authors">
+                    Zhiling Chen, <strong>Yang Zhang</strong>, Fardin Jalil Piran, Qianyu Zhou, Jiong Tang, Farhad Imani
+                  </div>
+                  <div class="paper-venue">arXiv, 2025</div>
+                  
+                  <div class="paper-btn-group">
+                    <a href="https://doi.org/10.48550/arXiv.2505.17295" class="paper-btn">Paper</a>
+                    <a href="https://ed1sonchen.github.io/ScanBot/" class="paper-btn">Website</a>
+                  </div>
+              </td>
+            </tr>
 
+            <tr class="paper-row">
+              <td style="vertical-align:middle">
+                  <a href="images/paper7.png">
+                      <img src='images/paper7.png' class="paper-img" alt="paper thumbnail">
+                  </a>
+              </td>
+              <td style="vertical-align:middle">
+                  <span class="paper-title">Rising Above Uncertainties: An Experimental Investigation on Adaptive Waveguiding Using Locally Resonant Piezoelectric Metasurface</span>
+                  <div class="paper-authors">
+                    Joshua Dupont, <strong>Yang Zhang*</strong>, Ting Wang, Jiong Tang
+                  </div>
+                  <div class="paper-venue">IEEE/ASME Transactions on Mechatronics</div>
+                  <div class="paper-btn-group">
+                    <a href="https://ieeexplore.ieee.org/document/10645328" class="paper-btn">Paper</a>
+                  </div>
+              </td>
+            </tr>
 
-     <script>
-       function showTab(tabName) {
-         const contents = document.querySelectorAll('.research-content');
-         contents.forEach(content => {
-           content.classList.remove('active');
-         });
-         
-         const buttons = document.querySelectorAll('.tab-button');
-         buttons.forEach(button => {
-           button.classList.remove('active');
-         });
-         
-         if (tabName === 'selected') {
-           document.getElementById('selected-research').classList.add('active');
-         } else if (tabName === 'full') {
-           document.getElementById('full-list').classList.add('active');
-         }
-         
-         event.target.classList.add('active');
-       }
-     </script>
-	  
-	<div style="margin-top: 30px;"></div>
-	
-    <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=300&t=tt&d=vx2vOsZRlPKZXmKc8bppfBlX0RHmRudYOCeKf7rBPfM'></script>
-    
-   </body>
- </html>
+            <tr class="paper-row">
+              <td style="vertical-align:middle">
+                  <a href="images/paper8.png">
+                      <img src='images/paper8.png' class="paper-img" alt="paper thumbnail">
+                  </a>
+              </td>
+              <td style="vertical-align:middle">
+                  <span class="paper-title">Advancing Future Space Habitation: A Cyber-Physical Testbed for Space Power System</span>
+                  <div class="paper-authors">
+                    Hasnain Nisar, Leila Chebbo, Ali M. Bazzi, <strong>Yang Zhang*</strong>, Chuanyu Xue, Jiong Tang, Song Han
+                  </div>
+                  <div class="paper-venue">IEEE Power Electronics Magazine</div>
+                  <div class="paper-btn-group">
+                    <a href="https://ieeexplore.ieee.org/abstract/document/10723169" class="paper-btn">Paper</a>
+                  </div>
+              </td>
+            </tr>
+
+            <tr class="paper-row">
+              <td style="vertical-align:middle">
+                  <a href="images/paper9.png">
+                      <img src='images/paper9.png' class="paper-img" alt="paper thumbnail">
+                  </a>
+              </td>
+              <td style="vertical-align:middle">
+                  <span class="paper-title">Unmanned aerial vehicle-based computer vision for structural vibration measurement and condition assessment</span>
+                  <div class="paper-authors">
+                    Kai Zhou, Zequn Wang, Yi-Qing Ni, <strong>Yang Zhang*</strong>, Jiong Tang
+                  </div>
+                  <div class="paper-venue">Journal of Infrastructure Intelligence and Resilience</div>
+                  <div class="paper-btn-group">
+                    <a href="https://doi.org/10.1016/j.iintel.2023.100031" class="paper-btn">Paper</a>
+                  </div>
+              </td>
+            </tr>
+
+            <tr class="paper-row">
+              <td style="vertical-align:middle">
+                  <a href="images/paper10.png">
+                      <img src='images/paper10.png' class="paper-img" alt="paper thumbnail">
+                  </a>
+              </td>
+              <td style="vertical-align:middle">
+                  <span class="paper-title">A reinforcement learning hyper-heuristic in multi-objective optimization with application to structural damage identification</span>
+                  <div class="paper-authors">
+                    Pei Cao, <strong>Yang Zhang*</strong>, Kai Zhou, Jiong Tang
+                  </div>
+                  <div class="paper-venue">Structural and Multidisciplinary Optimization</div>
+                  <div class="paper-btn-group">
+                    </div>
+              </td>
+            </tr>
+
+            <tr class="paper-row">
+              <td style="vertical-align:middle">
+                  <a href="images/paper11.png">
+                      <img src='images/paper11.png' class="paper-img" alt="paper thumbnail">
+                  </a>
+              </td>
+              <td style="vertical-align:middle">
+                  <span class="paper-title">Mixed-input Bayesian optimization method for structural damage diagnosis</span>
+                  <div class="paper-authors">
+                    Congfang Huang, Jaesung Lee, <strong>Yang Zhang*</strong>, Shiyu Zhou, Jiong Tang
+                  </div>
+                  <div class="paper-venue">IEEE Transactions on Reliability</div>
+                  <div class="paper-btn-group">
+                    <a href="https://ieeexplore.ieee.org/abstract/document/9795926" class="paper-btn">Paper</a>
+                  </div>
+              </td>
+            </tr>
+
+            <tr class="paper-row">
+              <td style="vertical-align:middle">
+                  <a href="images/paper12.png">
+                      <img src='images/paper12.png' class="paper-img" alt="paper thumbnail">
+                  </a>
+              </td>
+              <td style="vertical-align:middle">
+                  <span class="paper-title">Mechanical behavior of composite bistable shell structure and surrogate-based optimal design</span>
+                  <div class="paper-authors">
+                    <strong>Yang Zhang*</strong>, Hongling Ye, Bowen Li, Qingsheng Yang
+                  </div>
+                  <div class="paper-venue">Structural and Multidisciplinary Optimization</div>
+                  <div class="paper-btn-group">
+                    <a href="https://doi.org/10.1007/s00158-021-02890-7" class="paper-btn">Paper</a>
+                  </div>
+              </td>
+            </tr>
+
+            <tr class="paper-row">
+              <td style="vertical-align:middle">
+                  <a href="images/paper13.gif">
+                      <img src='images/paper13.gif' class="paper-img" alt="paper thumbnail">
+                  </a>
+              </td>
+              <td style="vertical-align:middle">
+                  <span class="paper-title">Quasi-static analysis and multi-objective optimization for tape spring hinge</span>
+                  <div class="paper-authors">
+                    Hongling Ye, <strong>Yang Zhang*</strong>, Qingsheng Yang, Bing Zhang
+                  </div>
+                  <div class="paper-venue">Structural and Multidisciplinary Optimization</div>
+                  <div class="paper-btn-group">
+                    <a href="https://doi.org/10.1007/s00158-019-02331-6" class="paper-btn">Paper</a>
+                  </div>
+              </td>
+            </tr>
+
+          </tbody>
+         </table>
+      </div>
+
+      <div class="section-title">Academic Service</div>
+      <ul class="news-list">
+        <li><strong>Journal Reviewer:</strong> SMO, Eng. Struct., KBS, JIMSS, Sci. Rep, J. Comput. Nonlinear Dyn., etc.</li>
+      </ul>
+
+      <div class="footer">
+        <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=300&t=tt&d=vx2vOsZRlPKZXmKc8bppfBlX0RHmRudYOCeKf7rBPfM'></script>
+        <p style="font-size:0.8em; color:#ccc; margin-top:20px;">&copy; 2025 Yang Zhang</p>
+      </div>
+
+    </div>
+
+    <script>
+      function showTab(tabName) {
+        const contents = document.querySelectorAll('.research-content');
+        contents.forEach(content => {
+          content.classList.remove('active');
+        });
+        
+        const buttons = document.querySelectorAll('.tab-button');
+        buttons.forEach(button => {
+          button.classList.remove('active');
+        });
+        
+        if (tabName === 'selected') {
+          document.getElementById('selected-research').classList.add('active');
+          // 找到第一个按钮并设为 active
+          document.querySelector('.tab-button:first-child').classList.add('active');
+        } else if (tabName === 'full') {
+          document.getElementById('full-list').classList.add('active');
+          // 找到第二个按钮并设为 active
+          document.querySelector('.tab-button:nth-child(2)').classList.add('active');
+        }
+      }
+    </script>
+  </body>
+</html>
