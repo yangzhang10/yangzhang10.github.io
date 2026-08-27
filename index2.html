@@ -1,0 +1,707 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Yang Zhang</title>
+
+    <meta name="author" content="Yang Zhang">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon/zy.png" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --bg: #0a0e1a;
+        --bg-card: rgba(255, 255, 255, 0.04);
+        --border: rgba(255, 255, 255, 0.09);
+        --text: #e6e9f0;
+        --text-dim: #9aa3b8;
+        --accent-1: #00d4ff;
+        --accent-2: #cc66da;
+        --accent-3: #3d74b6;
+        --gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        font-size: 16px;
+        line-height: 1.65;
+        overflow-x: hidden;
+      }
+
+      /* ---------- background layers ---------- */
+      #particles {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.55;
+        pointer-events: none;
+      }
+      .glow-orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(120px);
+        z-index: 0;
+        pointer-events: none;
+      }
+      .orb-1 { width: 480px; height: 480px; background: rgba(0, 212, 255, 0.10); top: -120px; left: -120px; }
+      .orb-2 { width: 520px; height: 520px; background: rgba(204, 102, 218, 0.10); bottom: -160px; right: -140px; }
+
+      .container {
+        position: relative;
+        z-index: 1;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 48px 24px 24px;
+      }
+
+      a { color: var(--accent-1); text-decoration: none; transition: color .25s ease; }
+      a:hover { color: var(--accent-2); }
+
+      /* ---------- hero ---------- */
+      .hero {
+        display: flex;
+        align-items: center;
+        gap: 48px;
+        padding: 36px 0 8px;
+      }
+      .hero-photo {
+        flex: 0 0 240px;
+      }
+      .hero-photo .ring {
+        padding: 4px;
+        border-radius: 20px;
+        background: var(--gradient);
+        box-shadow: 0 0 40px rgba(0, 212, 255, 0.25), 0 0 80px rgba(204, 102, 218, 0.15);
+      }
+      .hero-photo img {
+        display: block;
+        width: 100%;
+        border-radius: 16px;
+        object-fit: cover;
+      }
+      .hero-text { flex: 1; }
+      .name {
+        margin: 0 0 16px;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 3em;
+        font-weight: 700;
+        line-height: 1.1;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: left;
+      }
+      .intro {
+        font-size: 1.02em;
+        color: var(--text-dim);
+        margin: 0 0 14px;
+      }
+      .intro strong, .paper-content strong { color: var(--text); }
+
+      .contact-links { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+      .contact-links a {
+        display: inline-block;
+        padding: 7px 18px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--bg-card);
+        color: var(--text);
+        font-size: 0.92em;
+        font-weight: 500;
+        backdrop-filter: blur(6px);
+        transition: all .3s ease;
+      }
+      .contact-links a:hover {
+        border-color: var(--accent-1);
+        box-shadow: 0 0 18px rgba(0, 212, 255, 0.35);
+        transform: translateY(-2px);
+      }
+
+      /* ---------- sections ---------- */
+      section { margin-top: 64px; }
+
+      h1.section-title {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin: 0 0 28px;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.7em;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+      h1.section-title::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, var(--accent-1), transparent);
+        opacity: 0.6;
+      }
+      h1.section-title .tab-group { margin-left: auto; }
+
+      /* ---------- scroll reveal ---------- */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity .7s ease, transform .7s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ---------- news timeline ---------- */
+      .timeline {
+        list-style: none;
+        margin: 0;
+        padding: 0 0 0 24px;
+        border-left: 2px solid rgba(0, 212, 255, 0.25);
+      }
+      .timeline li {
+        position: relative;
+        margin-bottom: 18px;
+        color: var(--text-dim);
+      }
+      .timeline li::before {
+        content: "";
+        position: absolute;
+        left: -31px;
+        top: 8px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--bg);
+        border: 2px solid var(--accent-1);
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+      }
+      .timeline .date {
+        color: var(--accent-1);
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 500;
+        font-size: 0.85em;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      /* ---------- tabs ---------- */
+      .tab-group { display: inline-flex; gap: 8px; }
+      .tab-button {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        padding: 6px 18px;
+        border-radius: 999px;
+        cursor: pointer;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.55em;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        color: var(--text-dim);
+        transition: all 0.3s ease;
+      }
+      .tab-button:hover {
+        color: var(--text);
+        border-color: var(--accent-1);
+        transform: translateY(-2px);
+      }
+      .tab-button.active {
+        background: var(--gradient);
+        color: #0a0e1a;
+        font-weight: 700;
+        border-color: transparent;
+        box-shadow: 0 0 16px rgba(204, 102, 218, 0.4);
+      }
+
+      .research-content { display: none; }
+      .research-content.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* ---------- paper cards ---------- */
+      .paper-card {
+        display: flex;
+        gap: 28px;
+        align-items: center;
+        margin-bottom: 22px;
+        padding: 20px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: var(--bg-card);
+        backdrop-filter: blur(8px);
+        transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+      }
+      .paper-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(0, 212, 255, 0.45);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(0, 212, 255, 0.15);
+      }
+      .paper-thumb { flex: 0 0 42%; overflow: hidden; border-radius: 10px; }
+      .paper-thumb img {
+        display: block;
+        width: 100%;
+        border-radius: 10px;
+        transition: transform .5s ease;
+      }
+      .paper-card:hover .paper-thumb img { transform: scale(1.05); }
+      .paper-content { flex: 1; font-size: 0.95em; color: var(--text-dim); }
+      .papertitle {
+        display: block;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 1.12em;
+        line-height: 1.4;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+      .paper-venue {
+        display: inline-block;
+        margin: 8px 0;
+        padding: 3px 12px;
+        border-radius: 6px;
+        font-size: 0.82em;
+        font-style: normal;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        color: var(--accent-1);
+        background: rgba(0, 212, 255, 0.08);
+        border: 1px solid rgba(0, 212, 255, 0.25);
+      }
+      .paper-links { margin-top: 6px; display: flex; gap: 10px; }
+      .paper-links a {
+        padding: 4px 14px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--text);
+        font-size: 0.85em;
+        font-weight: 500;
+        transition: all .3s ease;
+      }
+      .paper-links a:hover {
+        border-color: var(--accent-2);
+        box-shadow: 0 0 14px rgba(204, 102, 218, 0.35);
+        transform: translateY(-2px);
+      }
+
+      /* ---------- service ---------- */
+      .service-list { margin: 0; padding-left: 20px; color: var(--text-dim); }
+      .service-list li { margin-bottom: 8px; }
+      .service-list strong { color: var(--text); }
+
+      /* ---------- footer ---------- */
+      .footer {
+        margin-top: 72px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border);
+        text-align: center;
+        color: var(--text-dim);
+        font-size: 0.85em;
+      }
+
+      /* ---------- responsive ---------- */
+      @media (max-width: 760px) {
+        .hero { flex-direction: column; gap: 24px; text-align: center; }
+        .hero-photo { flex: none; width: 200px; }
+        .name { text-align: center; font-size: 2.4em; }
+        .contact-links { justify-content: center; }
+        .paper-card { flex-direction: column; gap: 16px; }
+        .paper-thumb { flex: none; width: 100%; }
+        h1.section-title { flex-wrap: wrap; }
+        h1.section-title .tab-group { margin-left: 0; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="particles"></canvas>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <div class="container">
+
+      <!-- ================= Hero ================= -->
+      <div class="hero">
+        <div class="hero-photo">
+          <a href="images/scholar.png">
+            <div class="ring">
+              <img alt="profile photo" src="images/scholar.png">
+            </div>
+          </a>
+        </div>
+        <div class="hero-text">
+          <p class="name">Yang Zhang</p>
+          <p class="intro">
+            I'm a Postdoctoral Researcher at <a href="https://dscl.uconn.edu/">UConn DSC lab</a>, advised by Prof. <a href="https://dscl.uconn.edu/director/">Jiong Tang</a>. I received my Ph.D. in Mechanical Engineering from University of Connecticut in December 2024. My research interests lie in Computational Intelligence, AI-driven Engineering, Digital Twin, Inverse Analysis and Optimization, and Mechatronics Synthesis.
+          </p>
+          <p class="intro">
+            My research follows a three-tier approach: At the algorithmic level, I develop intelligent optimization methods including reinforcement learning-guided strategies, multi-agent coordination, and sparse representation techniques to enhance computational efficiency and accuracy. At the technical system level, I integrate these algorithms with physics-based modeling, sensor technologies, and machine learning frameworks to create robust engineering analysis tools. At the application level, I deploy these integrated solutions to tackle complex problems in prognostics and health management (PHM), metamaterials and intelligent structures, advanced manufacturing, bio-mechatronics, and inverse analysis across diverse engineering domains.
+          </p>
+          <p class="contact-links">
+            <a href="mailto:yang.3.zhang@uconn.edu">Email</a>
+            <a href="https://scholar.google.com/citations?user=NPhTb-wAAAAJ&hl=en&authuser=1">Google Scholar</a>
+            <a href="https://www.linkedin.com/in/yang-zhang-16822223a/">Linkedin</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- ================= News ================= -->
+      <section class="reveal">
+        <h1 class="section-title">News &amp; Updates</h1>
+        <ul class="timeline">
+          <li><span class="date">Sep 26 2025</span><br>Gave a talk at UConn CMSC webinar on "Toward Computational Intelligence in Digital Twin for Industrial 4.0​"</li>
+          <li><span class="date">Sep 11 2025</span><br><em>Less Can Be More: Dictionary-Driven Reconstruction of Full-Field Measurements from Optimally Configured Sensor Network</em> was accepted by MSSP.</li>
+          <li><span class="date">Aug 17 2025</span><br>Attended ASME IDETC-CIE 2025 conference and made presentation about wind turbine inspection using VLM</li>
+          <li><span class="date">May 2025</span><br>Paper accepted to ASME Letters in Dynamic Systems and Control</li>
+          <li><span class="date">Jan 2025</span><br>Paper accepted to AIAA Journal</li>
+          <li><span class="date">Jan 2025</span><br>Started postdoctoral position at UConn DSC lab</li>
+        </ul>
+      </section>
+
+      <!-- ================= Research ================= -->
+      <section class="reveal">
+        <h1 class="section-title">Research
+          <span class="tab-group">
+            <button class="tab-button active" onclick="showTab('selected', this)">selected</button>
+            <button class="tab-button" onclick="showTab('full', this)">all</button>
+          </span>
+        </h1>
+
+        <div id="selected-research" class="research-content active">
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paperReconstruction.png"><img src="images/paperReconstruction.png" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">Less Can Be More: Dictionary-driven reconstruction of full-field measurements from optimally configured sensor network</span>
+              <strong>Yang Zhang</strong>, Joshua Dupont, Qianyu Zhou, Jiong Tang
+              <br>
+              <em class="paper-venue">Mechanical Systems and Signal Processing</em>
+              <div class="paper-links">
+                <a href="https://doi.org/10.1016/j.ymssp.2025.113340">paper</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paper2.gif"><img src="images/paper2.gif" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">Harnessing collaborative learning automata to guide multi-objective optimization based inverse analysis for structural damage identification</span>
+              <strong>Yang Zhang</strong>, Kai Zhou, Jiong Tang
+              <br>
+              <em class="paper-venue">Applied Soft Computing</em>
+              <div class="paper-links">
+                <a href="https://doi.org/10.1016/j.asoc.2024.111697">paper</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paper3.gif"><img src="images/paper3.gif" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">Piezoelectric impedance-based high-accuracy damage identification using sparsity conscious multi-objective optimization inverse analysis</span>
+              <strong>Yang Zhang</strong>, Kai Zhou, Jiong Tang
+              <br>
+              <em class="paper-venue">Mechanical Systems and Signal Processing</em>
+              <div class="paper-links">
+                <a href="https://doi.org/10.1016/j.ymssp.2023.111093">paper</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paper4.png"><img src="images/paper4.png" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">Piezoelectric Impedance-Based Structural Damage Identification Empowered With Tunable Circuitry Integration and Multi-Objective Optimization-Based Inverse Analysis</span>
+              <strong>Yang Zhang*</strong>, Joshua Dupont, Ting Wang, Jiong Tang
+              <br>
+              <em class="paper-venue">Journal of Vibration and Acoustics</em>
+              <div class="paper-links">
+                <a href="https://doi.org/10.1115/1.4066311">paper</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="full-list" class="research-content">
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paper5.png"><img src="images/paper5.png" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">High-Frequency Active Interrogation for Structural Damage Identification Enabled by Intelligent Hierarchical Search</span>
+              <strong>Yang Zhang*</strong>, Jiong Tang
+              <br>
+              <em class="paper-venue">AIAA Journal</em>
+              <div class="paper-links">
+                <a href="https://doi.org/10.2514/1.J064863">paper</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paper1.png"><img src="images/paper1.png" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">Discriminative Feature Extraction Through Dictionary Learning for Piezoelectric Admittance-Based Bolt-Loosening Damage Detection</span>
+              <strong>Yang Zhang</strong>, Qianyu Zhou, Jiong Tang
+              <br>
+              <em class="paper-venue">ASME Letters in Dynamic Systems and Control</em>
+              <div class="paper-links">
+                <a href="https://doi.org/10.1115/1.4068353">paper</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paper6.png"><img src="images/paper6.png" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">ScanBot: Towards Intelligent Surface Scanning in Embodied Robotic Systems</span>
+              Zhiling Chen, <strong>Yang Zhang</strong>, Fardin Jalil Piran, Qianyu Zhou, Jiong Tang, Farhad Imani
+              <br>
+              <em class="paper-venue">arXiv</em>
+              <div class="paper-links">
+                <a href="https://doi.org/10.48550/arXiv.2505.17295">paper</a>
+                <a href="https://ed1sonchen.github.io/ScanBot/">website</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paper7.png"><img src="images/paper7.png" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">Rising Above Uncertainties: An Experimental Investigation on Adaptive Waveguiding Using Locally Resonant Piezoelectric Metasurface</span>
+              Joshua Dupont, <strong>Yang Zhang*</strong>, Ting Wang, Jiong Tang
+              <br>
+              <em class="paper-venue">IEEE/ASME Transactions on Mechatronics</em>
+              <div class="paper-links">
+                <a href="https://ieeexplore.ieee.org/document/10645328">paper</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paper8.png"><img src="images/paper8.png" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">Advancing Future Space Habitation: A Cyber-Physical Testbed for Space Power System</span>
+              Hasnain Nisar, Leila Chebbo, Ali M. Bazzi, <strong>Yang Zhang*</strong>, Chuanyu Xue, Jiong Tang, and Song Han.
+              <br>
+              <em class="paper-venue">IEEE Power Electronics Magazine</em>
+              <div class="paper-links">
+                <a href="https://ieeexplore.ieee.org/abstract/document/10723169">paper</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paper9.png"><img src="images/paper9.png" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">Unmanned aerial vehicle-based computer vision for structural vibration measurement and condition assessment: A concise survey</span>
+              Kai Zhou, Zequn Wang, Yi-Qing Ni, <strong>Yang Zhang*</strong>, Jiong Tang
+              <br>
+              <em class="paper-venue">Journal of Infrastructure Intelligence and Resilience</em>
+              <div class="paper-links">
+                <a href="https://doi.org/10.1016/j.iintel.2023.100031">paper</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paper10.png"><img src="images/paper10.png" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">A reinforcement learning hyper-heuristic in multi-objective optimization with application to structural damage identification</span>
+              Pei Cao, <strong>Yang Zhang*</strong>, Kai Zhou, Jiong Tang
+              <br>
+              <em class="paper-venue">Structural and Multidisciplinary Optimization</em>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paper11.png"><img src="images/paper11.png" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">Mixed-input Bayesian optimization method for structural damage diagnosis</span>
+              Congfang Huang, Jaesung Lee, <strong>Yang Zhang*</strong>, Shiyu Zhou, Jiong Tang
+              <br>
+              <em class="paper-venue">IEEE Transactions on Reliability</em>
+              <div class="paper-links">
+                <a href="https://ieeexplore.ieee.org/abstract/document/9795926">paper</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paper12.png"><img src="images/paper12.png" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">Mechanical behavior of composite bistable shell structure and surrogate-based optimal design</span>
+              <strong>Yang Zhang*</strong>, Hongling Ye, Bowen Li, Qingsheng Yang
+              <br>
+              <em class="paper-venue">Structural and Multidisciplinary Optimization</em>
+              <div class="paper-links">
+                <a href="https://doi.org/10.1007/s00158-021-02890-7">paper</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="paper-card">
+            <div class="paper-thumb">
+              <a href="images/paper13.gif"><img src="images/paper13.gif" alt="paper thumbnail"></a>
+            </div>
+            <div class="paper-content">
+              <span class="papertitle">Quasi-static analysis and multi-objective optimization for tape spring hinge</span>
+              Hongling Ye, <strong>Yang Zhang*</strong>, Qingsheng Yang, Bing Zhang
+              <br>
+              <em class="paper-venue">Structural and Multidisciplinary Optimization</em>
+              <div class="paper-links">
+                <a href="https://doi.org/10.1007/s00158-019-02331-6">paper</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= Academic Service ================= -->
+      <section class="reveal">
+        <h1 class="section-title">Academic Service</h1>
+        <ul class="service-list">
+          <li><strong>Journal Reviewer:</strong> SMO, Eng. Struct., KBS, JIMSS, Sci. Rep, J. Comput. Nonlinear Dyn., etc.</li>
+        </ul>
+      </section>
+
+      <!-- ================= Footer ================= -->
+      <div class="footer">
+        <script type="text/javascript" id="clustrmaps" src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=300&t=tt&d=vx2vOsZRlPKZXmKc8bppfBlX0RHmRudYOCeKf7rBPfM"></script>
+      </div>
+
+    </div>
+
+    <script>
+      /* ---------- tab switching ---------- */
+      function showTab(tabName, btn) {
+        document.querySelectorAll('.research-content').forEach(function (c) {
+          c.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-button').forEach(function (b) {
+          b.classList.remove('active');
+        });
+        if (tabName === 'selected') {
+          document.getElementById('selected-research').classList.add('active');
+        } else if (tabName === 'full') {
+          document.getElementById('full-list').classList.add('active');
+        }
+        btn.classList.add('active');
+      }
+
+      /* ---------- scroll reveal ---------- */
+      (function () {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+      })();
+
+      /* ---------- particle network background ---------- */
+      (function () {
+        var canvas = document.getElementById('particles');
+        var ctx = canvas.getContext('2d');
+        var particles = [];
+        var LINK_DIST = 130;
+
+        function resize() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          var count = Math.min(90, Math.floor(canvas.width * canvas.height / 22000));
+          particles = [];
+          for (var i = 0; i < count; i++) {
+            particles.push({
+              x: Math.random() * canvas.width,
+              y: Math.random() * canvas.height,
+              vx: (Math.random() - 0.5) * 0.35,
+              vy: (Math.random() - 0.5) * 0.35,
+              r: Math.random() * 1.6 + 0.6
+            });
+          }
+        }
+
+        function tick() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0, 212, 255, 0.7)';
+            ctx.fill();
+
+            for (var j = i + 1; j < particles.length; j++) {
+              var q = particles[j];
+              var dx = p.x - q.x, dy = p.y - q.y;
+              var dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < LINK_DIST) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(q.x, q.y);
+                ctx.strokeStyle = 'rgba(120, 140, 220,' + (0.28 * (1 - dist / LINK_DIST)) + ')';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+              }
+            }
+          }
+          requestAnimationFrame(tick);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          tick();
+        }
+      })();
+    </script>
+  </body>
+</html>
