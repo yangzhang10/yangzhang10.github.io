@@ -11,19 +11,20 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
       :root {
-        --bg: #0a0e1a;
-        --bg-card: rgba(255, 255, 255, 0.04);
-        --border: rgba(255, 255, 255, 0.09);
-        --text: #e6e9f0;
-        --text-dim: #9aa3b8;
-        --accent-1: #00d4ff;
-        --accent-2: #cc66da;
-        --accent-3: #3d74b6;
-        --gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+        --bg: #f5f6f8;
+        --bg-card: #ffffff;
+        --border: #e5e7eb;
+        --text: #1f2329;
+        --text-dim: #6b7280;
+        --accent: #4d6bfe;
+        --accent-dark: #3451b2;
+        --accent-soft: rgba(77, 107, 254, 0.08);
+        --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 16px rgba(16, 24, 40, 0.06);
+        --shadow-hover: 0 4px 8px rgba(16, 24, 40, 0.06), 0 16px 40px rgba(77, 107, 254, 0.14);
       }
 
       * { box-sizing: border-box; }
@@ -34,29 +35,19 @@
         margin: 0;
         background: var(--bg);
         color: var(--text);
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
         font-size: 16px;
         line-height: 1.65;
         overflow-x: hidden;
       }
 
-      /* ---------- background layers ---------- */
-      #particles {
+      /* ---------- interactive water/particle background ---------- */
+      #water {
         position: fixed;
         inset: 0;
         z-index: 0;
-        opacity: 0.55;
         pointer-events: none;
       }
-      .glow-orb {
-        position: fixed;
-        border-radius: 50%;
-        filter: blur(120px);
-        z-index: 0;
-        pointer-events: none;
-      }
-      .orb-1 { width: 480px; height: 480px; background: rgba(0, 212, 255, 0.10); top: -120px; left: -120px; }
-      .orb-2 { width: 520px; height: 520px; background: rgba(204, 102, 218, 0.10); bottom: -160px; right: -140px; }
 
       .container {
         position: relative;
@@ -66,8 +57,8 @@
         padding: 48px 24px 24px;
       }
 
-      a { color: var(--accent-1); text-decoration: none; transition: color .25s ease; }
-      a:hover { color: var(--accent-2); }
+      a { color: var(--accent); text-decoration: none; transition: color .25s ease; }
+      a:hover { color: var(--accent-dark); }
 
       /* ---------- hero ---------- */
       .hero {
@@ -76,34 +67,32 @@
         gap: 48px;
         padding: 36px 0 8px;
       }
-      .hero-photo {
-        flex: 0 0 240px;
-      }
-      .hero-photo .ring {
-        padding: 4px;
-        border-radius: 20px;
-        background: var(--gradient);
-        box-shadow: 0 0 40px rgba(0, 212, 255, 0.25), 0 0 80px rgba(204, 102, 218, 0.15);
-      }
+      .hero-photo { flex: 0 0 240px; }
       .hero-photo img {
         display: block;
         width: 100%;
-        border-radius: 16px;
+        border-radius: 20px;
         object-fit: cover;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-card);
+        transition: transform .4s ease, box-shadow .4s ease;
+      }
+      .hero-photo img:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-hover);
       }
       .hero-text { flex: 1; }
       .name {
         margin: 0 0 16px;
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Host Grotesk', sans-serif;
         font-size: 3em;
         font-weight: 700;
         line-height: 1.1;
-        background: var(--gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.02em;
+        color: var(--text);
         text-align: left;
       }
+      .name .dot { color: var(--accent); }
       .intro {
         font-size: 1.02em;
         color: var(--text-dim);
@@ -121,12 +110,13 @@
         color: var(--text);
         font-size: 0.92em;
         font-weight: 500;
-        backdrop-filter: blur(6px);
+        box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
         transition: all .3s ease;
       }
       .contact-links a:hover {
-        border-color: var(--accent-1);
-        box-shadow: 0 0 18px rgba(0, 212, 255, 0.35);
+        border-color: var(--accent);
+        color: var(--accent);
+        box-shadow: 0 4px 14px rgba(77, 107, 254, 0.18);
         transform: translateY(-2px);
       }
 
@@ -138,17 +128,17 @@
         align-items: center;
         gap: 18px;
         margin: 0 0 28px;
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Host Grotesk', sans-serif;
         font-size: 1.7em;
         font-weight: 700;
-        letter-spacing: 0.02em;
+        letter-spacing: -0.01em;
       }
       h1.section-title::after {
         content: "";
         flex: 1;
         height: 1px;
-        background: linear-gradient(90deg, var(--accent-1), transparent);
-        opacity: 0.6;
+        background: linear-gradient(90deg, var(--accent), transparent);
+        opacity: 0.35;
       }
       h1.section-title .tab-group { margin-left: auto; }
 
@@ -168,7 +158,7 @@
         list-style: none;
         margin: 0;
         padding: 0 0 0 24px;
-        border-left: 2px solid rgba(0, 212, 255, 0.25);
+        border-left: 2px solid #dfe3ea;
       }
       .timeline li {
         position: relative;
@@ -184,12 +174,11 @@
         height: 10px;
         border-radius: 50%;
         background: var(--bg);
-        border: 2px solid var(--accent-1);
-        box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+        border: 2px solid var(--accent);
       }
       .timeline .date {
-        color: var(--accent-1);
-        font-family: 'Space Grotesk', sans-serif;
+        color: var(--accent);
+        font-family: 'Host Grotesk', sans-serif;
         font-weight: 500;
         font-size: 0.85em;
         letter-spacing: 0.04em;
@@ -204,7 +193,7 @@
         padding: 6px 18px;
         border-radius: 999px;
         cursor: pointer;
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Host Grotesk', sans-serif;
         font-size: 0.55em;
         font-weight: 500;
         letter-spacing: 0.05em;
@@ -212,16 +201,16 @@
         transition: all 0.3s ease;
       }
       .tab-button:hover {
-        color: var(--text);
-        border-color: var(--accent-1);
+        color: var(--accent);
+        border-color: var(--accent);
         transform: translateY(-2px);
       }
       .tab-button.active {
-        background: var(--gradient);
-        color: #0a0e1a;
+        background: var(--accent);
+        color: #fff;
         font-weight: 700;
         border-color: transparent;
-        box-shadow: 0 0 16px rgba(204, 102, 218, 0.4);
+        box-shadow: 0 4px 14px rgba(77, 107, 254, 0.35);
       }
 
       .research-content { display: none; }
@@ -241,26 +230,25 @@
         border: 1px solid var(--border);
         border-radius: 16px;
         background: var(--bg-card);
-        backdrop-filter: blur(8px);
+        box-shadow: var(--shadow-card);
         transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
       }
       .paper-card:hover {
         transform: translateY(-4px);
-        border-color: rgba(0, 212, 255, 0.45);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(0, 212, 255, 0.15);
+        border-color: rgba(77, 107, 254, 0.4);
+        box-shadow: var(--shadow-hover);
       }
-      .paper-thumb { flex: 0 0 42%; overflow: hidden; border-radius: 10px; }
+      .paper-thumb { flex: 0 0 42%; overflow: hidden; border-radius: 10px; border: 1px solid var(--border); }
       .paper-thumb img {
         display: block;
         width: 100%;
-        border-radius: 10px;
         transition: transform .5s ease;
       }
       .paper-card:hover .paper-thumb img { transform: scale(1.05); }
       .paper-content { flex: 1; font-size: 0.95em; color: var(--text-dim); }
       .papertitle {
         display: block;
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Host Grotesk', sans-serif;
         font-weight: 700;
         font-size: 1.12em;
         line-height: 1.4;
@@ -276,24 +264,25 @@
         font-style: normal;
         font-weight: 600;
         letter-spacing: 0.03em;
-        color: var(--accent-1);
-        background: rgba(0, 212, 255, 0.08);
-        border: 1px solid rgba(0, 212, 255, 0.25);
+        color: var(--accent);
+        background: var(--accent-soft);
+        border: 1px solid rgba(77, 107, 254, 0.2);
       }
       .paper-links { margin-top: 6px; display: flex; gap: 10px; }
       .paper-links a {
         padding: 4px 14px;
         border-radius: 8px;
         border: 1px solid var(--border);
-        background: rgba(255, 255, 255, 0.03);
+        background: var(--bg-card);
         color: var(--text);
         font-size: 0.85em;
         font-weight: 500;
         transition: all .3s ease;
       }
       .paper-links a:hover {
-        border-color: var(--accent-2);
-        box-shadow: 0 0 14px rgba(204, 102, 218, 0.35);
+        border-color: var(--accent);
+        color: var(--accent);
+        box-shadow: 0 4px 12px rgba(77, 107, 254, 0.18);
         transform: translateY(-2px);
       }
 
@@ -312,6 +301,125 @@
         font-size: 0.85em;
       }
 
+      /* ---------- desktop pet ---------- */
+      #pet {
+        position: fixed;
+        right: 28px;
+        bottom: 28px;
+        z-index: 10;
+        width: 88px;
+        cursor: pointer;
+        user-select: none;
+        animation: petFloat 3.2s ease-in-out infinite;
+        filter: drop-shadow(0 8px 16px rgba(77, 107, 254, 0.25));
+      }
+      @keyframes petFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+      }
+      .pet-body {
+        position: relative;
+        width: 88px;
+        height: 76px;
+        background: linear-gradient(160deg, #ffffff, #eef1ff);
+        border: 2px solid var(--accent);
+        border-radius: 24px 24px 20px 20px;
+      }
+      .pet-antenna {
+        position: absolute;
+        left: 50%;
+        top: -16px;
+        width: 2px;
+        height: 14px;
+        background: var(--accent);
+        transform: translateX(-50%);
+      }
+      .pet-antenna::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: -8px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        transform: translateX(-50%);
+        animation: antennaGlow 2s ease-in-out infinite;
+      }
+      @keyframes antennaGlow {
+        0%, 100% { box-shadow: 0 0 4px rgba(77, 107, 254, 0.6); }
+        50% { box-shadow: 0 0 12px rgba(77, 107, 254, 1); }
+      }
+      .pet-eye {
+        position: absolute;
+        top: 26px;
+        width: 18px;
+        height: 18px;
+        background: #fff;
+        border: 2px solid var(--accent);
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      .pet-eye.left { left: 20px; }
+      .pet-eye.right { right: 20px; }
+      .pet-pupil {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent-dark);
+        transform: translate(-50%, -50%);
+      }
+      .pet-eye.blink .pet-pupil { animation: blink .18s ease; }
+      @keyframes blink {
+        0%, 100% { transform: translate(-50%, -50%) scaleY(1); }
+        50% { transform: translate(-50%, -50%) scaleY(0.1); }
+      }
+      .pet-mouth {
+        position: absolute;
+        left: 50%;
+        bottom: 16px;
+        width: 16px;
+        height: 8px;
+        border: 2px solid var(--accent);
+        border-top: none;
+        border-radius: 0 0 12px 12px;
+        transform: translateX(-50%);
+      }
+      .pet-bubble {
+        position: absolute;
+        right: 100px;
+        bottom: 40px;
+        min-width: 140px;
+        max-width: 200px;
+        padding: 10px 14px;
+        background: #fff;
+        border: 1px solid var(--accent);
+        border-radius: 14px;
+        font-size: 13px;
+        color: var(--text);
+        box-shadow: var(--shadow-card);
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity .3s ease, transform .3s ease;
+        pointer-events: none;
+      }
+      .pet-bubble.show { opacity: 1; transform: translateY(0); }
+      .pet-bubble::after {
+        content: "";
+        position: absolute;
+        right: -7px;
+        bottom: 14px;
+        width: 12px;
+        height: 12px;
+        background: #fff;
+        border-right: 1px solid var(--accent);
+        border-top: 1px solid var(--accent);
+        transform: rotate(45deg);
+      }
+
       /* ---------- responsive ---------- */
       @media (max-width: 760px) {
         .hero { flex-direction: column; gap: 24px; text-align: center; }
@@ -322,28 +430,29 @@
         .paper-thumb { flex: none; width: 100%; }
         h1.section-title { flex-wrap: wrap; }
         h1.section-title .tab-group { margin-left: 0; }
+        #pet { width: 64px; right: 16px; bottom: 16px; }
+        .pet-body { width: 64px; height: 56px; border-radius: 18px 18px 14px 14px; }
+        .pet-eye { top: 18px; width: 13px; height: 13px; }
+        .pet-eye.left { left: 14px; }
+        .pet-eye.right { right: 14px; }
+        .pet-pupil { width: 6px; height: 6px; }
+        .pet-mouth { bottom: 10px; width: 12px; height: 6px; }
       }
     </style>
   </head>
 
   <body>
-    <canvas id="particles"></canvas>
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
+    <canvas id="water"></canvas>
 
     <div class="container">
 
       <!-- ================= Hero ================= -->
       <div class="hero">
         <div class="hero-photo">
-          <a href="images/scholar.png">
-            <div class="ring">
-              <img alt="profile photo" src="images/scholar.png">
-            </div>
-          </a>
+          <a href="images/scholar.png"><img alt="profile photo" src="images/scholar.png"></a>
         </div>
         <div class="hero-text">
-          <p class="name">Yang Zhang</p>
+          <p class="name">Yang Zhang<span class="dot">.</span></p>
           <p class="intro">
             I'm a Postdoctoral Researcher at <a href="https://dscl.uconn.edu/">UConn DSC lab</a>, advised by Prof. <a href="https://dscl.uconn.edu/director/">Jiong Tang</a>. I received my Ph.D. in Mechanical Engineering from University of Connecticut in December 2024. My research interests lie in Computational Intelligence, AI-driven Engineering, Digital Twin, Inverse Analysis and Optimization, and Mechatronics Synthesis.
           </p>
@@ -612,6 +721,17 @@
 
     </div>
 
+    <!-- ================= Desktop pet ================= -->
+    <div id="pet" title="Click me!">
+      <div class="pet-bubble" id="petBubble">Hello!</div>
+      <div class="pet-body">
+        <div class="pet-antenna"></div>
+        <div class="pet-eye left"><div class="pet-pupil"></div></div>
+        <div class="pet-eye right"><div class="pet-pupil"></div></div>
+        <div class="pet-mouth"></div>
+      </div>
+    </div>
+
     <script>
       /* ---------- tab switching ---------- */
       function showTab(tabName, btn) {
@@ -642,52 +762,115 @@
         document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
       })();
 
-      /* ---------- particle network background ---------- */
+      /* ---------- interactive water/particle background ---------- */
       (function () {
-        var canvas = document.getElementById('particles');
+        var canvas = document.getElementById('water');
         var ctx = canvas.getContext('2d');
         var particles = [];
-        var LINK_DIST = 130;
+        var ripples = [];
+        var mouse = { x: -9999, y: -9999 };
+        var LINK_DIST = 120;
+        var MOUSE_RADIUS = 140;
+        var lastRipple = 0;
 
         function resize() {
           canvas.width = window.innerWidth;
           canvas.height = window.innerHeight;
-          var count = Math.min(90, Math.floor(canvas.width * canvas.height / 22000));
+          var count = Math.min(110, Math.floor(canvas.width * canvas.height / 16000));
           particles = [];
           for (var i = 0; i < count; i++) {
             particles.push({
               x: Math.random() * canvas.width,
               y: Math.random() * canvas.height,
-              vx: (Math.random() - 0.5) * 0.35,
-              vy: (Math.random() - 0.5) * 0.35,
-              r: Math.random() * 1.6 + 0.6
+              ox: 0, oy: 0,           // offset caused by mouse push
+              vx: (Math.random() - 0.5) * 0.3,
+              vy: (Math.random() - 0.5) * 0.3,
+              r: Math.random() * 1.8 + 0.8
             });
           }
         }
 
+        function addRipple(x, y, strength) {
+          ripples.push({ x: x, y: y, r: 4, max: 90 * strength, alpha: 0.35 });
+        }
+
+        window.addEventListener('mousemove', function (e) {
+          mouse.x = e.clientX;
+          mouse.y = e.clientY;
+          var now = performance.now();
+          if (now - lastRipple > 90) {
+            addRipple(e.clientX, e.clientY, 1);
+            lastRipple = now;
+          }
+        });
+        window.addEventListener('click', function (e) {
+          addRipple(e.clientX, e.clientY, 2.2);
+        });
+        window.addEventListener('mouseout', function () {
+          mouse.x = -9999; mouse.y = -9999;
+        });
+
         function tick() {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
-          for (var i = 0; i < particles.length; i++) {
-            var p = particles[i];
+
+          /* ripples */
+          for (var i = ripples.length - 1; i >= 0; i--) {
+            var rp = ripples[i];
+            rp.r += 2.2;
+            rp.alpha *= 0.94;
+            if (rp.r > rp.max || rp.alpha < 0.01) {
+              ripples.splice(i, 1);
+              continue;
+            }
+            ctx.beginPath();
+            ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(77, 107, 254,' + rp.alpha + ')';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(rp.x, rp.y, rp.r * 0.6, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(77, 107, 254,' + (rp.alpha * 0.6) + ')';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+
+          /* particles: drift + mouse repulsion, spring back */
+          for (var j = 0; j < particles.length; j++) {
+            var p = particles[j];
             p.x += p.vx;
             p.y += p.vy;
             if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
             if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
+            var dx = p.x + p.ox - mouse.x;
+            var dy = p.y + p.oy - mouse.y;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < MOUSE_RADIUS && dist > 0.1) {
+              var force = (1 - dist / MOUSE_RADIUS) * 3.2;
+              p.ox += (dx / dist) * force;
+              p.oy += (dy / dist) * force;
+            }
+            p.ox *= 0.92;
+            p.oy *= 0.92;
+
+            var px = p.x + p.ox;
+            var py = p.y + p.oy;
+
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(0, 212, 255, 0.7)';
+            ctx.arc(px, py, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(77, 107, 254, 0.45)';
             ctx.fill();
 
-            for (var j = i + 1; j < particles.length; j++) {
-              var q = particles[j];
-              var dx = p.x - q.x, dy = p.y - q.y;
-              var dist = Math.sqrt(dx * dx + dy * dy);
-              if (dist < LINK_DIST) {
+            for (var k = j + 1; k < particles.length; k++) {
+              var q = particles[k];
+              var qx = q.x + q.ox, qy = q.y + q.oy;
+              var ddx = px - qx, ddy = py - qy;
+              var d = Math.sqrt(ddx * ddx + ddy * ddy);
+              if (d < LINK_DIST) {
                 ctx.beginPath();
-                ctx.moveTo(p.x, p.y);
-                ctx.lineTo(q.x, q.y);
-                ctx.strokeStyle = 'rgba(120, 140, 220,' + (0.28 * (1 - dist / LINK_DIST)) + ')';
+                ctx.moveTo(px, py);
+                ctx.lineTo(qx, qy);
+                ctx.strokeStyle = 'rgba(120, 140, 220,' + (0.18 * (1 - d / LINK_DIST)) + ')';
                 ctx.lineWidth = 1;
                 ctx.stroke();
               }
@@ -701,6 +884,63 @@
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
           tick();
         }
+      })();
+
+      /* ---------- desktop pet ---------- */
+      (function () {
+        var pet = document.getElementById('pet');
+        var bubble = document.getElementById('petBubble');
+        var pupils = pet.querySelectorAll('.pet-pupil');
+        var eyes = pet.querySelectorAll('.pet-eye');
+        var bubbleTimer = null;
+
+        var phrases = [
+          'Hello, I\'m Y2!',
+          'Digital Twin, literally.',
+          'beep boop ~',
+          'Optimizing... done!',
+          'Nice cursor you have.',
+          'Less can be more!',
+          'Click me again!'
+        ];
+        var phraseIdx = 0;
+
+        /* eyes follow cursor */
+        window.addEventListener('mousemove', function (e) {
+          eyes.forEach(function (eye) {
+            var rect = eye.getBoundingClientRect();
+            var cx = rect.left + rect.width / 2;
+            var cy = rect.top + rect.height / 2;
+            var dx = e.clientX - cx;
+            var dy = e.clientY - cy;
+            var angle = Math.atan2(dy, dx);
+            var range = rect.width / 2 - 5;
+            var pupil = eye.querySelector('.pet-pupil');
+            pupil.style.transform =
+              'translate(calc(-50% + ' + (Math.cos(angle) * range) + 'px), calc(-50% + ' + (Math.sin(angle) * range) + 'px))';
+          });
+        });
+
+        /* blink */
+        setInterval(function () {
+          if (Math.random() < 0.7) {
+            eyes.forEach(function (eye) {
+              eye.classList.add('blink');
+              setTimeout(function () { eye.classList.remove('blink'); }, 200);
+            });
+          }
+        }, 2600);
+
+        /* talk on click */
+        pet.addEventListener('click', function () {
+          bubble.textContent = phrases[phraseIdx % phrases.length];
+          phraseIdx++;
+          bubble.classList.add('show');
+          clearTimeout(bubbleTimer);
+          bubbleTimer = setTimeout(function () {
+            bubble.classList.remove('show');
+          }, 2200);
+        });
       })();
     </script>
   </body>
